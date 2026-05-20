@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/src/style.css" />
+    <title>Mountain Park Pool - Admin</title>
+</head>
+
+<body class="bg-white">
+    mountain-park-pool/index.html
+    <header
+        class="fixed bg-seagreen border-b-4 border-mustard shadow-sm  top-0 left-0 right-0 z-30 bg-white-400  flex items-center justify-between px-6 pb-2">
+        <!-- Logo / Site Name -->
+        <a href="/" class="text-3xl font-bold text-blue-700 tracking-tight"><img src="/photos/logo.png" alt="logo"
+                class="object-cover w-15 h-15"></a>
+
+        <!-- Desktop Nav -->
+        <nav class="hidden lg:flex gap-8 text-sm font-medium">
+            <a href="/" class="hover:text-blue-600">Home</a>
+            <a href="/pricing/" class="hover:text-blue-600">Pricing</a>
+            <a href="/events/" class="hover:text-blue-600">Events</a>
+            <a href="/parties/" class="hover:text-blue-600">Parties</a>
+            <a href="/contact/" class="hover:text-blue-600">Contact</a>
+        </nav>
+
+        <!-- Mobile Hamburger -->
+        <button id="menuButton" class="lg:hidden p-2" aria-label="Open menu">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24"
+                stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+        </button>
+    </header>
+
+    <!-- Slide-in Mobile Menu -->
+    <div id="mobileMenu" class="fixed top-0 right-0 h-full w-64 bg-cream shadow-lg z-40
+           transform translate-x-full transition-transform duration-300 ease-in-out">
+        <div class="flex items-center justify-between px-4 py-4 border-b-3 border-burnedorange">
+            <span class="font-normal text-base font-header tracking-widest text-darkblue">Mountain Park Pool</span>
+            <button id="closeMenu" aria-label="Close menu">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="#6681A5"
+                    stroke-width="1">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+        </div>
+        <nav class="flex flex-col px-6 py-4 gap-4 text-3xl font-semibold font-header">
+            <a href="/" class="text-burnedorange">Home</a>
+            <a href="/join/" class="text-waterblue">Join</a>
+            <a href="/events/" class="text-mustard-dark">Book Event</a>
+            <a href="/parties/" class="text-darkseagreen">Pool Calendar</a>
+            <a href="/rules/" class="text-burnedorange">Pool Rules</a>
+            <a href="/login/" class="text-waterblue">My Account</a>
+            <a href="/admin/" class="adminMenu text-mustard-dark hidden">Admin</a>
+
+            <button class="logoutBtn hidden text-darkseagreen font-header font-semibold text-3xl text-left">
+                Sign Out
+            </button>
+
+
+
+        </nav>
+        <div
+            class="absolute bottom-6 left-6 right-6 border-t border-mustard pt-4 flex flex-col gap-6 justify-between items-center">
+            <span class="text-sm text-darkblue opacity-60">Mon–Sun • 7am–12am</span>
+            <div class="flex gap-3">
+                <!-- your social SVGs here -->
+                <img src="/icons/insta.svg" alt="instagram" class="w-6 h-6">
+                <img src="/icons/facebook.svg" alt="facebook" class="w-6 h-6">
+                <a href="tel:+19158615336" aria-label="Call us" class="hover:opacity-70 transition-opacity">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="none"
+                        stroke="#6681A5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path
+                            d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.4 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.78a16 16 0 0 0 6.29 6.29l.95-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z" />
+                    </svg>
+                </a>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Overlay -->
+    <div id="overlay" class="fixed inset-0 bg-black/40 z-30 hidden"></div>
+    <main class="pt-17 px-4 min-h-screen">
+
+        <!-- Auth loading / access denied state -->
+        <div id="accessDenied" class="hidden flex-col items-center justify-center text-center gap-4 pt-16">
+            <div class="text-5xl">🔒</div>
+            <h2 class="font-header font-bold text-2xl text-darkblue">Access Denied</h2>
+            <p class="text-sm text-darkblue/60">You don't have permission to view this page.</p>
+            <a href="/" class="text-burnedorange font-bold underline text-sm">← Back to Home</a>
+        </div>
+
+        <!-- Admin content -->
+        <div id="adminContent" class="hidden flex flex-col gap-4">
+
+            <!-- Header -->
+            <div class="flex items-center justify-between">
+                <div>
+                    <h1 class="font-header font-bold text-4xl text-burnedorange">Admin</h1>
+                    <p class="text-xs text-darkblue/50 mt-0.5">Mountain Park Pool · Member Management</p>
+                </div>
+                <span id="seasonLabel" class="text-xs font-semibold text-darkblue/40"></span>
+            </div>
+
+            <div class="bg-mustard w-full h-[1.5px]"></div>
+
+            <!-- Stats -->
+            <div class="grid grid-cols-3 gap-2">
+                <div class="bg-darkblue border border-mustard rounded-xl p-2 flex flex-col gap-1">
+                    <span class="text-xs font-bold uppercase tracking-widest text-cream">Total</span>
+                    <span id="statTotal" class="font-bold text-3xl text-mustard">—</span>
+                    <span class="text-xs text-cream">members</span>
+                </div>
+                <div class="bg-seagreen border border-darkseagreen rounded-xl p-2 flex flex-col gap-1">
+                    <span class="text-xs font-bold uppercase tracking-widest text-darkseagreen">Active</span>
+                    <span id="statActive" class="font-bold text-3xl text-darkseagreen">—</span>
+                    <span class="text-xs text-darkseagreen">paid</span>
+                </div>
+                <div class="bg-mustard border border-mustard-dark rounded-xl p-2 flex flex-col gap-1">
+                    <span class="text-xs font-bold uppercase tracking-widest text-darkblue">Pending</span>
+                    <span id="statPending" class=" font-bold text-3xl text-mustard-dark">—</span>
+                    <span class="text-xs text-darkblue">awaiting</span>
+                </div>
+            </div>
+
+            <!-- Tabs -->
+            <div class="flex gap-1 bg-cream border border-mustard rounded-xl p-1">
+                <button id="tabMembers"
+                    class="tab-btn flex-1 py-2 rounded-lg text-xs font-bold bg-waterblue text-white transition-all">
+                    Members
+                </button>
+                <button id="tabBookings"
+                    class="tab-btn flex-1 py-2 rounded-lg text-xs font-bold text-darkblue/50 transition-all">
+                    Bookings
+                </button>
+                <button id="tabCheckins"
+                    class="tab-btn flex-1 py-2 rounded-lg text-xs font-bold text-darkblue/50 transition-all">
+                    Check-Ins
+                </button>
+            </div>
+
+            <!-- MEMBERS TAB -->
+            <div id="membersTab" class="flex flex-col gap-3">
+                <div class="flex gap-2">
+                    <input id="memberSearch" type="text" placeholder="Search members..."
+                        class="flex-1 bg-cream border border-mustard rounded-lg px-3 py-2.5 text-sm text-darkblue placeholder:text-darkblue/30 focus:outline-none focus:ring-2 focus:ring-waterblue" />
+                    <select id="memberFilter"
+                        class="bg-darkblue border-2 border-cream rounded-lg px-3 py-2.5 text-xs font-semibold text-cream focus:outline-none">
+                        <option value="all">All</option>
+                        <option value="active">Active</option>
+                        <option value="pending">Pending</option>
+                        <option value="expired">Expired</option>
+                    </select>
+                    <button id="exportBtn"
+                        class="bg-burnedorange border-2 border-burnedorange-dark rounded-lg px-3 py-2.5 text-xs font-bold text-cream hover:border-waterblue transition-colors">
+                        ↓ CSV
+                    </button>
+                </div>
+                <div id="membersList" class="flex flex-col gap-2"></div>
+            </div>
+
+            <!-- BOOKINGS TAB -->
+            <div id="bookingsTab" class="hidden flex-col gap-3">
+                <div class="flex gap-2">
+                    <input id="bookingSearch" type="text" placeholder="Search bookings..."
+                        class="flex-1 bg-cream border border-mustard rounded-lg px-3 py-2.5 text-sm text-darkblue placeholder:text-darkblue/30 focus:outline-none focus:ring-2 focus:ring-waterblue" />
+                    <select id="bookingFilter"
+                        class="bg-burnedorange border-2 border-burnedorange-dark rounded-lg px-3 py-2.5 text-xs font-semibold text-cream focus:outline-none">
+                        <option value="all">All</option>
+                        <option value="pending">Pending</option>
+                        <option value="confirmed">Confirmed</option>
+                        <option value="cancelled">Cancelled</option>
+                    </select>
+                </div>
+                <div id="bookingsList" class="flex flex-col gap-2"></div>
+            </div>
+            <!-- CHECKINS TAB -->
+            <div id="checkinsTab" class="hidden flex-col gap-3">
+                <div class="flex gap-2">
+                    <input id="checkinSearch" type="text" placeholder="Search checkins..."
+                        class="flex-1 bg-cream border border-mustard rounded-lg px-3 py-2.5 text-sm text-darkblue placeholder:text-darkblue/30 focus:outline-none focus:ring-2 focus:ring-waterblue" />
+                    <select id="checkinsFilter"
+                        class="bg-burnedorange border-2 border-burnedorange-dark rounded-lg px-3 py-2.5 text-xs font-semibold text-cream focus:outline-none">
+                        <option value="all">Newest</option>
+                        <option value="pending">Oldest</option>
+                    </select>
+                </div>
+                <div id="checkinsList" class="flex flex-col gap-2"></div>
+            </div>
+
+        </div>
+
+    </main>
+
+    <script src="main.js" type="module"></script>
+</body>
+
+</html>

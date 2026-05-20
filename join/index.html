@@ -1,0 +1,602 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/src/style.css" />
+    <title>Mountain Park Pool - Join</title>
+</head>
+
+<body class="bg-white">
+    <header
+        class="fixed bg-seagreen border-b-4 border-mustard shadow-sm  top-0 left-0 right-0 z-30 bg-white-400  flex items-center justify-between px-6 pb-2">
+        <!-- Logo / Site Name -->
+        <a href="/" class="text-3xl font-bold text-blue-700 tracking-tight"><img src="/photos/logo.png" alt="logo"
+                class="object-cover w-15 h-15"></a>
+
+        <!-- Desktop Nav -->
+        <nav class="hidden lg:flex gap-8 text-sm font-medium">
+            <a href="/" class="hover:text-blue-600">Home</a>
+            <a href="/pricing/" class="hover:text-blue-600">Pricing</a>
+            <a href="/events/" class="hover:text-blue-600">Events</a>
+            <a href="/parties/" class="hover:text-blue-600">Parties</a>
+            <a href="/contact/" class="hover:text-blue-600">Contact</a>
+        </nav>
+
+        <!-- Mobile Hamburger -->
+        <button id="menuButton" class="lg:hidden p-2" aria-label="Open menu">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24"
+                stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+        </button>
+    </header>
+
+    <!-- Slide-in Mobile Menu -->
+    <div id="mobileMenu" class="fixed top-0 right-0 h-full w-64 bg-cream shadow-lg z-40
+           transform translate-x-full transition-transform duration-300 ease-in-out">
+        <div class="flex items-center justify-between px-4 py-4 border-b-3 border-burnedorange">
+            <span class="font-normal text-base font-header tracking-widest text-darkblue">Mountain Park Pool</span>
+            <button id="closeMenu" aria-label="Close menu">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="#6681A5"
+                    stroke-width="1">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+        </div>
+        <nav class="flex flex-col px-6 py-4 gap-4 text-3xl font-semibold font-header">
+            <a href="/" class="text-burnedorange">Home</a>
+            <a href="/join/" class="text-waterblue">Join</a>
+            <a href="/events/" class="text-mustard-dark">Book Event</a>
+            <a href="/parties/" class="text-darkseagreen">Pool Calendar</a>
+            <a href="/rules/" class="text-burnedorange">Pool Rules</a>
+            <a href="/login/" class="text-waterblue">My Account</a>
+            <a href="/admin/" class="adminMenu text-mustard-dark hidden">Admin</a>
+
+            <button class="logoutBtn hidden text-darkseagreen font-header font-semibold text-3xl text-left">
+                Sign Out
+            </button>
+
+
+
+        </nav>
+        <div
+            class="absolute bottom-6 left-6 right-6 border-t border-mustard pt-4 flex flex-col gap-6 justify-between items-center">
+            <span class="text-sm text-darkblue opacity-60">Mon–Sun • 7am–12am</span>
+            <div class="flex gap-3">
+                <!-- your social SVGs here -->
+                <img src="/icons/insta.svg" alt="instagram" class="w-6 h-6">
+                <img src="/icons/facebook.svg" alt="facebook" class="w-6 h-6">
+                <a href="tel:+19158615336" aria-label="Call us" class="hover:opacity-70 transition-opacity">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="none"
+                        stroke="#6681A5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path
+                            d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.4 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.78a16 16 0 0 0 6.29 6.29l.95-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z" />
+                    </svg>
+                </a>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Overlay -->
+    <div id="overlay" class="fixed inset-0 bg-black/40 z-30 hidden"></div>
+
+    <main class="pt-23 p-4">
+        <section>
+            <div class="flex flex-col gap-2">
+                <h1
+                    class="text-3xl font-header font-bold text-waterblue border-2 border-waterblue p-2 rounded-xl bg-mustard w-2/3">
+                    Memberships</h1>
+                <p class="text-sm text-darkblue/80">Become a member of Mountain Park Pool and make this a family summer
+                    tradition.</p>
+            </div>
+            <div class="bg-mustard w-full h-[1.5px] mt-5"></div>
+        </section>
+        <section class="pt-10">
+            <div class="infoCardsContainer flex flex-col gap-15">
+
+                <div class="priceCardContainer flex flex-col gap-3">
+                    <div class="flex items-center justify-between gap-3">
+                        <span class="uppercase text-xs tracking-widest font-bold text-darkblue">Pricing</span>
+                        <div class="bg-mustard w-full h-[1.5px]"></div>
+                    </div>
+                    <div
+                        class="priceCard rounded-xl p-4 px-5 flex flex-col gap-5 bg-waterblue shadow-md border-l-4 border-mustard">
+
+                        <div class="flex justify-between items-center">
+                            <div class="flex flex-col gap-1">
+                                <span class="text-mustard text-xs font-semibold tracking-widest">SEASON PASS 2026</span>
+                                <h2 class="text-3xl text-cream font-header font-bold w-min">Full Season Membership</h2>
+                                <span class="text-sm tracking-widest text-mustard font-bold">MAY 25 - SEP 7</span>
+                            </div>
+
+                            <h2 class="text-4xl text-mustard font-bold">$475</h2>
+                        </div>
+                        <div class="bg-mustard w-full h-[1.5px]"></div>
+                        <ul class="text-cream text-lg flex flex-col gap-2">
+                            <li class="flex items-center flex-row gap-2">
+                                <img src="/icons/sun-orange.svg" alt="-" class="w-6 h-6">
+                                <span>Pool access all season</span>
+                            </li>
+                            <li class="flex items-center flex-row gap-2">
+                                <img src="/icons/sun-orange.svg" alt="-" class="w-6 h-6">
+                                <span>Guest Privileges</span>
+                            </li>
+                            <li class="flex items-center flex-row gap-2">
+                                <img src="/icons/sun-orange.svg" alt="-" class="w-6 h-6">
+                                <span>Park Grills</span>
+                            </li>
+                            <li class="flex items-center flex-row gap-2">
+                                <img src="/icons/sun-orange.svg" alt="-" class="w-6 h-6">
+                                <span>30% off event rentals</span>
+                            </li>
+                        </ul>
+                        <a href=""
+                            class="text-center rounded-xl m-auto px-13 py-3 bg-mustard uppercase tracking-widest border-2 border-burnedorange text-darkblue font-bold">Fill
+                            out sign up form</a>
+                    </div>
+                </div>
+
+
+
+                <div class="accordionContainer flex flex-col gap-3">
+                    <div class="flex items-center gap-3">
+                        <span class="uppercase text-xs tracking-widest font-bold text-darkblue whitespace-nowrap">What's
+                            Included</span>
+                        <div class="bg-mustard w-full h-[1.5px]"></div>
+                    </div>
+
+                    <div id="accordion" class="flex flex-col gap-3">
+
+                        <div class="accordion-item bg-cream rounded-xl border border-mustard overflow-hidden">
+                            <button class="accordion-header w-full flex items-center justify-between px-4 py-4 gap-3"
+                                aria-expanded="false">
+                                <div class="flex items-center gap-3">
+                                    <div class="flex items-center justify-center">
+                                        <img src="/icons/clock-darkblue.svg" alt="" class="w-8 h-8">
+                                    </div>
+                                    <span class="font-semibold text-darkblue text-sm">Pool Access & Hours</span>
+                                </div>
+                                <svg class="accordion-chevron w-4 h-4 text-darkblue opacity-50 transition-transform duration-200 flex-shrink-0"
+                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                                </svg>
+                            </button>
+                            <div class="accordion-body max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
+                                <p class="px-4 pb-4 text-sm text-darkblue/70 leading-relaxed">
+                                    Full pool access every day of the season, Mon–Sun from 6am to 12am. Your membership
+                                    covers your entire household (up to 4) + 6 guests — no per-visit fees.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item bg-cream rounded-xl border border-mustard overflow-hidden">
+                            <button class="accordion-header w-full flex items-center justify-between px-4 py-4 gap-3"
+                                aria-expanded="false">
+                                <div class="flex items-center gap-3">
+                                    <div class="flex items-center justify-center">
+                                        <img src="/icons/person-darkblue.svg" alt="" class="w-8 h-8">
+                                    </div>
+                                    <span class="font-semibold text-darkblue text-sm">Guest Policy</span>
+                                </div>
+                                <svg class="accordion-chevron w-4 h-4 text-darkblue opacity-50 transition-transform duration-200 flex-shrink-0"
+                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                                </svg>
+                            </button>
+                            <div class="accordion-body max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
+                                <p class="px-4 pb-4 text-sm text-darkblue/70 leading-relaxed">
+                                    Members are allowed to bring up to 6 guest - no additional fees. There is a strict
+                                    10 people max per visit. Anything over 10 will be considered a party - please use
+                                    our <a href="/events/" class="underline text-burnedorange">booking system</a> to
+                                    reserve a date.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item bg-cream rounded-xl border border-mustard overflow-hidden">
+                            <button class="accordion-header w-full flex items-center justify-between px-4 py-4 gap-3"
+                                aria-expanded="false">
+                                <div class="flex items-center gap-3">
+                                    <div class="flex items-center justify-center">
+                                        <img src="/icons/grill-orange.svg" alt="" class="w-8 h-8">
+                                    </div>
+                                    <span class="font-semibold text-darkblue text-sm">Clubhouse & Grills</span>
+                                </div>
+                                <svg class="accordion-chevron w-4 h-4 text-darkblue opacity-50 transition-transform duration-200 flex-shrink-0"
+                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                                </svg>
+                            </button>
+                            <div class="accordion-body max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
+                                <p class="px-4 pb-4 text-sm text-darkblue/70 leading-relaxed">
+                                    Charcoal grills will be available inside the park on a first come first serve basis
+                                    throughout the season. The roundhouse includes 2 restrooms and a ping pong table.
+                                    Please bring your own ball and paddles.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item bg-cream rounded-xl border border-mustard overflow-hidden">
+                            <button class="accordion-header w-full flex items-center justify-between px-4 py-4 gap-3"
+                                aria-expanded="false">
+                                <div class="flex items-center gap-3">
+                                    <div class="flex items-center justify-center">
+                                        <img src="/icons/discount-blue.svg" alt="" class="w-8 h-8">
+                                    </div>
+                                    <span class="font-semibold text-darkblue text-sm">Event Rental Discount</span>
+                                </div>
+                                <svg class="accordion-chevron w-4 h-4 text-darkblue opacity-50 transition-transform duration-200 flex-shrink-0"
+                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                                </svg>
+                            </button>
+                            <div class="accordion-body max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
+                                <p class="px-4 pb-4 text-sm text-darkblue/70 leading-relaxed">
+                                    Members receive 30% off private pool rentals for birthdays, reunions, and other
+                                    events. <a href="/events/" class="underline text-waterblue">Contact us</a> to check
+                                    availability and book.
+                                </p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="mapContainer flex flex-col gap-3">
+                    <div class="flex items-center gap-3">
+                        <span
+                            class="uppercase text-xs tracking-widest font-bold text-darkblue whitespace-nowrap">Eligible
+                            Area</span>
+                        <div class="bg-mustard w-full h-[1.5px]"></div>
+                    </div>
+
+                    <div class="rounded-xl overflow-hidden border border-mustard shadow-sm">
+                        <!-- swap this img src out when your real map is ready -->
+                        <img src="/photos/map-region.png" alt="Map of eligible membership area in Northeast El Paso"
+                            class="w-full object-cover" />
+                        <div class="bg-cream px-4 py-3 flex items-start gap-2">
+                            <img src="/icons/yellow-pin.svg" alt="" class="w-5 h-5 mt-0.5 flex-shrink-0">
+                            <p class="text-sm text-darkblue/70 leading-relaxed">
+                                Membership is open to residents in the surrounding Northeast El Paso neighborhoods. Not
+                                sure if you qualify? <a href="/contact/"
+                                    class="text-burnedorange font-semibold underline">Contact us.</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+        <section class="pt-15">
+            <div class="flex items-center gap-3 mb-5">
+                <span class="uppercase text-xs tracking-widest font-bold text-darkblue whitespace-nowrap">Payment
+                    Info</span>
+                <div class="bg-mustard w-full h-[1.5px]"></div>
+            </div>
+
+            <div class="flex flex-col gap-3">
+
+                <!-- Zelle -->
+                <div
+                    class="bg-darkblue rounded-xl border border-mustard p-4 flex gap-4 items-start border-l-4 border-l-mustard">
+                    <img src="/icons/zelle.svg" alt="" class="w-8 h-8 flex-shrink-0 mt-0.5">
+                    <div class="flex flex-col gap-1">
+                        <span class="text-normal font-bold uppercase tracking-widest text-cream">Zelle</span>
+                        <p class="text-sm text-cream">
+                            Send <strong class="text-cream font-bold text-base leading-[1px]">$475</strong> via Zelle to:
+                        </p>
+                        <span class="font-bold text-darkblue text-sm bg-cream w-min px-3 py-1 rounded-full shadow-sm">themountainparkpool@gmail.com</span>
+                        <p class="text-xs text-cream mt-1">Include your full name in the memo so we can match your
+                            payment.</p>
+                    </div>
+                </div>
+
+                <!-- Check -->
+                <div
+                    class="bg-burnedorange rounded-xl border border-burnedorange-dark p-4 flex gap-4 items-start border-l-4 border-l-burnedorange-dark">
+                    <img src="/icons/check.svg" alt="" class="w-8 h-8 flex-shrink-0 mt-0.5">
+                    <div class="flex flex-col gap-1">
+                        <span class="text-normal font-bold uppercase tracking-widest text-cream">Check</span>
+                        <p class="text-sm text-cream/70 leading-relaxed">
+                            Make checks payable to <strong class="text-cream">Mountain Park Pool</strong> and mail
+                            to:
+                        </p>
+                        <address class="not-italic text-sm font-bold shadow-sm text-burnedorange bg-cream mr-auto rounded-xl p-2 px-4 leading-relaxed">
+                            3030 Mesa Verde Ln<br>
+                            El Paso, TX 79904
+                        </address>
+                    </div>
+                </div>
+
+                <!-- Cash -->
+                <div
+                    class="bg-seagreen rounded-xl border border-mustard p-4 flex gap-4 items-start border-l-4 border-l-mustard">
+                    <img src="/icons/cash.svg" alt="" class="w-8 h-8 flex-shrink-0 mt-0.5">
+                    <div class="flex flex-col gap-1">
+                        <span class="text-normal font-bold uppercase tracking-widest text-darkseagreen">Cash</span>
+                        <p class="text-sm text-darkseagreen/70 leading-relaxed">
+                            Cash payments can be made in person on <strong class="text-darkseagreen">Memorial Day, May
+                                25th</strong> at the pool, or by appointment.
+                        </p>
+                        <a href="/contact/" class="text-sm font-bold text-darkseagreen underline">Schedule a time →</a>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+        <section class="pt-15 pb-10">
+            <div class="flex items-center gap-3 mb-5">
+                <span class="uppercase text-xs tracking-widest font-bold text-darkblue whitespace-nowrap">Join
+                    Form</span>
+                <div class="bg-mustard w-full h-[1.5px]"></div>
+            </div>
+
+            <form id="joinForm" action="#" method="POST" class="flex flex-col gap-5">
+
+                <!-- Primary Member Name -->
+                <div class="flex gap-3">
+                    <div class="flex flex-col gap-1.5 flex-1 min-w-0">
+                        <label for="firstName" class="text-xs font-bold uppercase tracking-widest text-darkblue">First
+                            Name</label>
+                        <input type="text" id="firstName" name="firstName" required autocomplete="given-name"
+                            class="rounded-lg border border-mustard bg-cream px-4 py-3 text-sm text-darkblue placeholder:text-darkblue/40 focus:outline-none focus:ring-2 focus:ring-waterblue"
+                            placeholder="Maria" />
+                    </div>
+                    <div class="flex flex-col gap-1.5 flex-1 min-w-0">
+                        <label for="lastName" class="text-xs font-bold uppercase tracking-widest text-darkblue">Last
+                            Name</label>
+                        <input type="text" id="lastName" name="lastName" required autocomplete="family-name"
+                            class="rounded-lg border border-mustard bg-cream px-4 py-3 text-sm text-darkblue placeholder:text-darkblue/40 focus:outline-none focus:ring-2 focus:ring-waterblue"
+                            placeholder="Garcia" />
+                    </div>
+                </div>
+
+                <!-- Address -->
+                <div class="flex flex-col gap-1.5">
+                    <label for="address" class="text-xs font-bold uppercase tracking-widest text-darkblue">Home
+                        Address</label>
+                    <input type="text" id="address" name="address" required autocomplete="street-address"
+                        class="rounded-lg border border-mustard bg-cream px-4 py-3 text-sm text-darkblue placeholder:text-darkblue/40 focus:outline-none focus:ring-2 focus:ring-waterblue"
+                        placeholder="1234 Mountain Park Dr, El Paso, TX 79904" />
+                </div>
+
+                <!-- Email -->
+                <div class="flex flex-col gap-1.5">
+                    <label for="email" class="text-xs font-bold uppercase tracking-widest text-darkblue">Email
+                        Address</label>
+                    <input type="email" id="email" name="email" required autocomplete="email"
+                        class="rounded-lg border border-mustard bg-cream px-4 py-3 text-sm text-darkblue placeholder:text-darkblue/40 focus:outline-none focus:ring-2 focus:ring-waterblue"
+                        placeholder="maria@email.com" />
+                </div>
+
+                <!-- Password -->
+                <div class="flex flex-col gap-1.5">
+                    <label for="password" class="text-xs font-bold uppercase tracking-widest text-darkblue">
+                        Create Password
+                    </label>
+                    <input type="password" id="password" name="password" required autocomplete="new-password"
+                        minlength="8"
+                        class="rounded-lg border border-mustard bg-cream px-4 py-3 text-sm text-darkblue placeholder:text-darkblue/40 focus:outline-none focus:ring-2 focus:ring-waterblue"
+                        placeholder="Min. 8 characters" />
+                </div>
+
+                <!-- Confirm Password -->
+                <div class="flex flex-col gap-1.5">
+                    <label for="confirmPassword" class="text-xs font-bold uppercase tracking-widest text-darkblue">
+                        Confirm Password
+                    </label>
+                    <input type="password" id="confirmPassword" name="confirmPassword" required
+                        autocomplete="new-password" minlength="8"
+                        class="rounded-lg border border-mustard bg-cream px-4 py-3 text-sm text-darkblue placeholder:text-darkblue/40 focus:outline-none focus:ring-2 focus:ring-waterblue"
+                        placeholder="Re-enter password" />
+                </div>
+
+                <!-- Phone -->
+                <div class="flex flex-col gap-1.5">
+                    <label for="phone" class="text-xs font-bold uppercase tracking-widest text-darkblue">Phone
+                        Number</label>
+                    <input type="tel" id="phone" name="phone" required autocomplete="tel"
+                        class="rounded-lg border border-mustard bg-cream px-4 py-3 text-sm text-darkblue placeholder:text-darkblue/40 focus:outline-none focus:ring-2 focus:ring-waterblue"
+                        placeholder="(915) 555-1234" />
+                </div>
+
+                <!-- Household Members -->
+                <div class="flex flex-col gap-3">
+                    <div class="flex items-center justify-between">
+                        <label class="text-xs font-bold uppercase tracking-widest text-darkblue">Household
+                            Members</label>
+                        <span class="text-xs text-darkblue/40">Up to 3 more</span>
+                    </div>
+
+                    <div id="membersList" class="flex flex-col gap-3"></div>
+
+                    <button type="button" id="addMember"
+                        class="flex items-center justify-center gap-2 rounded-lg border-2 border-dashed border-mustard bg-cream px-4 py-3 text-sm font-semibold text-darkblue/60 hover:border-waterblue hover:text-waterblue transition-all">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 5v14M5 12h14" />
+                        </svg>
+                        Add Household Member
+                    </button>
+                </div>
+
+                <!-- Emergency Contact -->
+                <div class="flex flex-col gap-3">
+                    <div class="flex items-center gap-3">
+                        <span
+                            class="uppercase text-xs tracking-widest font-bold text-darkblue whitespace-nowrap">Emergency
+                            Contact</span>
+                        <div class="bg-mustard w-full h-[1.5px]"></div>
+                    </div>
+                    <div class="flex gap-3">
+                        <div class="flex flex-col gap-1.5 flex-1 min-w-0">
+                            <label for="ecName" class="text-xs font-bold uppercase tracking-widest text-darkblue">Full
+                                Name</label>
+                            <input type="text" id="ecName" name="ecName" required autocomplete="off"
+                                class="rounded-lg border border-mustard bg-cream px-4 py-3 text-sm text-darkblue placeholder:text-darkblue/40 focus:outline-none focus:ring-2 focus:ring-waterblue"
+                                placeholder="Juan Garcia" />
+                        </div>
+                        <div class="flex flex-col gap-1.5 flex-1 min-w-0">
+                            <label for="ecPhone"
+                                class="text-xs font-bold uppercase tracking-widest text-darkblue">Phone</label>
+                            <input type="tel" id="ecPhone" name="ecPhone" required autocomplete="off"
+                                class="rounded-lg border border-mustard bg-cream px-4 py-3 text-sm text-darkblue placeholder:text-darkblue/40 focus:outline-none focus:ring-2 focus:ring-waterblue"
+                                placeholder="(915) 555-5678" />
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Payment Preference -->
+                <div class="flex flex-col gap-2">
+                    <div class="flex items-center gap-3 mb-1">
+                        <span
+                            class="uppercase text-xs tracking-widest font-bold text-darkblue whitespace-nowrap">Payment
+                            Preference</span>
+                        <div class="bg-mustard w-full h-[1.5px]"></div>
+                    </div>
+                    <div class="flex gap-3">
+                        <label class="flex-1 cursor-pointer">
+                            <input type="radio" name="payment" value="zelle" class="peer sr-only" required />
+                            <div
+                                class="rounded-lg border-2 border-mustard bg-cream px-3 py-3 text-center text-sm font-semibold text-darkblue transition-all peer-checked:border-waterblue peer-checked:bg-waterblue peer-checked:text-white">
+                                Zelle
+                            </div>
+                        </label>
+                        <label class="flex-1 cursor-pointer">
+                            <input type="radio" name="payment" value="check" class="peer sr-only" />
+                            <div
+                                class="rounded-lg border-2 border-mustard bg-cream px-3 py-3 text-center text-sm font-semibold text-darkblue transition-all peer-checked:border-waterblue peer-checked:bg-waterblue peer-checked:text-white">
+                                Check
+                            </div>
+                        </label>
+                        <label class="flex-1 cursor-pointer">
+                            <input type="radio" name="payment" value="cash" class="peer sr-only" />
+                            <div
+                                class="rounded-lg border-2 border-mustard bg-cream px-3 py-3 text-center text-sm font-semibold text-darkblue transition-all peer-checked:border-waterblue peer-checked:bg-waterblue peer-checked:text-white">
+                                Cash
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Divider -->
+                <div class="bg-mustard w-full h-[1.5px]"></div>
+
+                <!-- Checkboxes -->
+                <div class="flex flex-col gap-4">
+
+                    <label class="flex items-start gap-3 cursor-pointer">
+                        <input type="checkbox" name="agreeRules" required
+                            class="mt-0.5 h-5 w-5 flex-shrink-0 rounded border-mustard accent-waterblue cursor-pointer" />
+                        <span class="text-sm text-darkblue/80 leading-relaxed">
+                            I have read and agree to the
+                            <a href="/rules/" class="text-burnedorange font-semibold underline">Mountain Park Pool rules
+                                and guidelines.</a>
+                        </span>
+                    </label>
+
+                    <label class="flex items-start gap-3 cursor-pointer">
+                        <input type="checkbox" name="agreeLiability" required
+                            class="mt-0.5 h-5 w-5 flex-shrink-0 rounded border-mustard accent-waterblue cursor-pointer" />
+                        <span class="text-sm text-darkblue/80 leading-relaxed">
+                            I understand that Mountain Park Pool is not responsible for accidents, injuries, or loss of
+                            personal property occurring on the premises.
+                        </span>
+                    </label>
+
+                    <label class="flex items-start gap-3 cursor-pointer">
+                        <input type="checkbox" name="verifyInfo" required
+                            class="mt-0.5 h-5 w-5 flex-shrink-0 rounded border-mustard accent-waterblue cursor-pointer" />
+                        <span class="text-sm text-darkblue/80 leading-relaxed">
+                            I verify that the information provided is accurate and that I reside in the eligible
+                            membership area.
+                        </span>
+                    </label>
+
+                    <label class="flex items-start gap-3 cursor-pointer">
+                        <input type="checkbox" name="photoConsent"
+                            class="mt-0.5 h-5 w-5 flex-shrink-0 rounded border-mustard accent-waterblue cursor-pointer" />
+                        <span class="text-sm text-darkblue/80 leading-relaxed">
+                            <span
+                                class="text-darkblue/40 text-xs uppercase tracking-wide font-semibold mr-1">Optional</span>
+                            I consent to being photographed at pool events for use on Mountain Park Pool's social media.
+                        </span>
+                    </label>
+
+                </div>
+
+                <!-- Submit -->
+                <button type="submit"
+                    class="w-full rounded-xl bg-mustard border-2 border-burnedorange text-darkblue font-bold uppercase tracking-widest py-4 text-sm transition-all hover:bg-mustard-dark hover:text-white mt-2">
+                    Submit Application
+                </button>
+
+                <p class="text-xs text-darkblue/50 text-center leading-relaxed">
+                    After submitting, complete your payment of <strong class="text-darkblue/70">$475</strong> via your
+                    chosen method. Your membership will be activated within 2–3 days of payment confirmation.
+                </p>
+
+            </form>
+        </section>
+
+
+
+    </main>
+
+
+    <footer class=" border-t-4 border-mustard mt-12 px-6 py-8">
+        <div class="flex flex-col items-center gap-4">
+
+            <!-- Logo / Name -->
+            <p class="font-header font-bold text-darkblue text-lg tracking-wide">Mountain Park Pool</p>
+
+            <!-- Social Icons -->
+            <div class="flex gap-5">
+
+                <!-- Instagram -->
+                <a href="#" aria-label="Instagram" class="hover:opacity-70 transition-opacity">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="none"
+                        stroke="#6681A5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+                        <circle cx="12" cy="12" r="4" />
+                        <circle cx="17.5" cy="6.5" r="0.5" fill="#6681A5" />
+                    </svg>
+                </a>
+
+                <!-- Facebook -->
+                <a href="#" aria-label="Facebook" class="hover:opacity-70 transition-opacity">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="none"
+                        stroke="#6681A5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+                    </svg>
+                </a>
+
+                <a href="tel:+19158615336" aria-label="Call us" class="hover:opacity-70 transition-opacity">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="none"
+                        stroke="#6681A5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path
+                            d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.4 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.78a16 16 0 0 0 6.29 6.29l.95-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z" />
+                    </svg>
+                </a>
+
+            </div>
+
+            <!-- Divider -->
+            <div class="w-16 h-0.5 bg-mustard"></div>
+
+            <!-- Copyright -->
+            <p class="text-xs text-darkblue opacity-70 text-center">
+                &copy; <span id="footer-year">2026</span> Mountain Park Pool. All rights reserved.
+            </p>
+
+        </div>
+    </footer>
+
+    <script src="main.js" type="module"></script>
+</body>
+
+</html>
