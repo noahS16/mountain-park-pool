@@ -22,6 +22,6 @@ document.querySelectorAll('.accordion-header').forEach(header => {
   })
 })
 
-document.addEventListener('click', (e) => {
-  console.log('clicked element:', e.target)
-})
+// document.addEventListener('click', (e) => {
+//   console.log('clicked element:', e.target)
+// })

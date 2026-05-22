@@ -1,5 +1,5 @@
 import { signUpUser, insertProfile, insertHouseholdMembers, insertMembership, getCurrentSeason } from '../services/db.js';
-import {supabase} from '../services/db.js';
+import { supabase } from '../services/db.js';
 
 // ── DYNAMIC HOUSEHOLD MEMBERS ──────────────────────────
 const membersList = document.getElementById('membersList')
@@ -136,16 +136,16 @@ form.addEventListener('submit', async (e) => {
     const photoConsent = form.querySelector('input[name="photoConsent"]').checked
     const householdMembers = collectHouseholdMembers()
     console.log({
-            firstName,
-            lastName,
-            address,
-            email,
-            phone,
-            ecName,
-            ecPhone,
-            payment,
-            photoConsent,
-        })
+        firstName,
+        lastName,
+        address,
+        email,
+        phone,
+        ecName,
+        ecPhone,
+        payment,
+        photoConsent,
+    })
 
     // client-side validation
     if (password !== confirmPassword) {
@@ -162,19 +162,14 @@ form.addEventListener('submit', async (e) => {
 
     try {
         // 1. get current season
-        const season = await getCurrentSeason()
+        //const season = await getCurrentSeason()
 
-        const user = await signUpUser(email, password)
+        // hold household members.
+        localStorage.setItem('pendingSignup', JSON.stringify({
+            householdMembers: householdMembers,
+        }))
 
-        // wait for session to be fully established
-        const { data: { session } } = await supabase.auth.getSession()
-        if (!session) {
-            // session not ready yet, retry once after a short delay
-            await new Promise(resolve => setTimeout(resolve, 1000))
-        }
-
-        // 3. update profile with full details
-        await insertProfile(user, {
+        const user = await signUpUser(email, password, {
             firstName,
             lastName,
             address,
@@ -186,14 +181,55 @@ form.addEventListener('submit', async (e) => {
             photoConsent,
         })
 
+        // wait for session to be fully established
+        // const { data: { session } } = await supabase.auth.getSession()
+        // if (!session) {
+        //     // session not ready yet, retry once after a short delay
+        //     await new Promise(resolve => setTimeout(resolve, 1000))
+        // }
+
+        // 3. update profile with full details
+        // await insertProfile(user, {
+        //     firstName,
+        //     lastName,
+        //     address,
+        //     email,
+        //     phone,
+        //     ecName,
+        //     ecPhone,
+        //     payment,
+        //     photoConsent,
+        // })
+
         // 4. insert household members if any
-        await insertHouseholdMembers(user.id, householdMembers)
+        //await insertHouseholdMembers(user.id, householdMembers)
 
         // 5. insert membership for current season
-        await insertMembership(user.id, season.id)
+        //await insertMembership(user.id, season.id)
 
         // success — redirect to account page
-        window.location.href = '/account/'
+        // instead of redirecting, show a check email message
+        document.getElementById('joinForm').classList.add('hidden')
+        const msg = document.createElement('div')
+        msg.className = 'flex flex-col items-center text-center gap-5 py-10'
+        msg.innerHTML = `
+            <div class="bg-mustard p-4 rounded-full">
+                <img src="/icons/email-darkblue.svg" alt="email" class="w-10 h-10">
+            </div>
+            
+            <h2 class="font-header font-bold text-2xl text-waterblue">Check your email!</h2>
+            <p class="text-sm text-darkblue/60 leading-relaxed max-w-xs">
+                We sent a confirmation link to <strong class="text-darkblue">${email}</strong>. 
+                Click the link to activate your account, then come back to sign in.
+            </p>
+            <p class="text-xs text-darkblue/40 leading-relaxed">
+                Didn't get it? Check your spam folder or contact us at
+                <a href="mailto:themountainparkpool@gmail.com" class="text-burnedorange underline">themountainparkpool@gmail.com</a>
+            </p>
+            <a href="/login/" class="text-sm font-bold text-burnedorange underline mt-2">← Go to Sign In</a>
+        `
+        document.querySelector('main').appendChild(msg)
+        //window.scrollTo({ top: 0, behavior: 'smooth' })
 
     } catch (err) {
         console.error(err)

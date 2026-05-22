@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="/src/style.css" />
+  <title>Mountain Park Pool - Confirm Email</title>
+</head>
+<body class="bg-cream">
+  <main class="min-h-screen flex flex-col items-center justify-center px-6 py-10 text-center gap-5">
+
+    <a href="/"><img src="/photos/logo.png" alt="logo" class="w-20 h-20 object-cover mb-2" /></a>
+
+    <!-- Loading state -->
+    <div id="loadingState" class="flex flex-col items-center gap-4">
+      <!-- <div class="w-16 h-16 rounded-full bg-waterblue/10 flex items-center justify-center text-3xl animate-pulse">🌊</div> -->
+      <p class="text-sm text-darkblue/50">Confirming your email...</p>
+    </div>
+
+    <!-- Success state -->
+    <div id="successState" class="hidden flex-col items-center gap-5">
+      <div class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center text-4xl p-5"><img src="/icons/checkmark-darkblue.svg" alt="Checkmark" class="w-12 h-12"></div>
+      <h1 class="font-header font-bold text-2xl text-waterblue">You're confirmed!</h1>
+      <p class="text-sm text-darkblue/60 leading-relaxed max-w-xs">
+        Your Mountain Park Pool account is now active. Sign in to view your membership and check in at the pool.
+      </p>
+      <a href="/login/"
+        class="bg-waterblue text-white font-bold uppercase tracking-widest text-sm py-4 px-8 rounded-xl hover:bg-waterblue-dark transition-all">
+        Sign In Now
+      </a>
+    </div>
+
+    <!-- Error state -->
+    <div id="errorState" class="hidden flex-col items-center gap-5">
+      <div class="w-20 h-20 bg-red-100 rounded-full flex items-center justify-center text-4xl">❌</div>
+      <h1 class="font-header font-bold text-2xl text-darkblue">Something went wrong</h1>
+      <p class="text-sm text-darkblue/60 leading-relaxed max-w-xs">
+        This confirmation link may have expired or already been used. Try signing in or contact us for help.
+      </p>
+      <a href="/login/" class="text-burnedorange font-bold underline text-sm">← Go to Sign In</a>
+      <a href="mailto:themountainparkpool@gmail.com" class="text-xs text-darkblue/40 underline">themountainparkpool@gmail.com</a>
+    </div>
+
+  </main>
+
+  <script src="main.js" type="module"></script>
+</body>
+</html>

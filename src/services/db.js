@@ -5,10 +5,26 @@ const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY
 
 export const supabase = createClient(supabaseUrl, supabaseAnonKey)
 
-export async function signUpUser(email, password) {
-    const { data, error } = await supabase.auth.signUp({ email, password })
-    if (error) throw error
-    return data.user
+export async function signUpUser(email, password, profileData) {
+  const { data, error } = await supabase.auth.signUp({ 
+    email, 
+    password, 
+    options: {
+      emailRedirectTo: `${window.location.origin}/confirm/`,
+      data: {
+        first_name: profileData.firstName,
+        last_name: profileData.lastName,
+        address: profileData.address,
+        phone: profileData.phone,
+        emergency_contact_name: profileData.ecName,
+        emergency_contact_phone: profileData.ecPhone,
+        payment_preference: profileData.payment,
+        photo_consent: profileData.photoConsent,
+      }
+    }
+  })
+  if (error) throw error
+  return data.user
 }
 
 export async function signInUser(email, password) {
