@@ -110,17 +110,17 @@ function getPendingNoticeText(preference) {
         case 'zelle':
             return `
         <strong class="block uppercase tracking-wide text-xs mb-1">⚠ Awaiting Payment</strong>
-        Send <strong>$475</strong> via Zelle to <strong>themountainparkpool@gmail.com</strong> — include your full name in the memo to activate your membership.
+        Send <strong>$475</strong> via Zelle to <strong>themountainparkpool@gmail.com</strong> — please include your full name in the memo.
       `
         case 'check':
             return `
         <strong class="block uppercase tracking-wide text-xs mb-1">⚠ Awaiting Payment</strong>
-        Mail a check for <strong>$475</strong> payable to <strong>Mountain Park Pool</strong> to [Street Address], El Paso, TX [ZIP] — include your full name on the memo line.
+        Mail a check for <strong>$475</strong> payable to <strong>Mountain Park Pool</strong> to 3405 Montridge Ct, El Paso, TX 79904 — include your full name on the memo line.
       `
         case 'cash':
             return `
         <strong class="block uppercase tracking-wide text-xs mb-1">⚠ Awaiting Payment</strong>
-        Bring <strong>$475 cash</strong> to the pool on <strong>Memorial Day, May 25th</strong> or <a href="/contact/" class="underline font-bold">contact us</a> to schedule a time.
+        Bring <strong>$475 cash</strong> to the pool on <strong>Memorial Day, May 25th</strong> or <a href="tel:+19152608231" class="underline font-bold">contact us</a> to schedule a time.
       `
         default:
             return `
@@ -223,7 +223,7 @@ function capitalize(str) {
 }
 
 function getRelativeTime(date) {
-    const diff = Math.floor((Date.now() - date.getTime()) / (1000 * 60 * 60 * 12))
+    const diff = Math.floor((Date.now() - date.getTime()) / (1000 * 60 * 60 * 18))
     if (diff === 0) return 'Today'
     if (diff === 1) return 'Yesterday'
     return `${diff} days ago`

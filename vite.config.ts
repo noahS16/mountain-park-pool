@@ -12,6 +12,7 @@ export default defineConfig({
         main: resolve(__dirname, 'index.html'),
         join: resolve(__dirname, 'join/index.html'),
         events: resolve(__dirname, 'events/index.html'),
+        calendar: resolve(__dirname, 'calendar/index.html'),
         rules: resolve(__dirname, 'rules/index.html'),
         login: resolve(__dirname, 'login/index.html'),
         account: resolve(__dirname, 'account/index.html'),

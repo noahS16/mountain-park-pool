@@ -1,5 +1,8 @@
 @import "tailwindcss";
 
+html{
+  scroll-behavior: smooth;
+}
 /* Fonts */
 @font-face {
   font-family: "Playfair Display";

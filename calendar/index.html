@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/photos/logo.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/src/style.css" />
+    <title>Mountain Park Pool - Calendar</title>
+</head>
+
+<body class="bg-white">
+    <header
+        class="fixed bg-seagreen border-b-4 border-mustard shadow-sm  top-0 left-0 right-0 z-30 bg-white-400  flex items-center justify-between px-6 pb-2">
+        <!-- Logo / Site Name -->
+        <a href="/" class="text-3xl font-bold text-blue-700 tracking-tight"><img src="/photos/logo.png" alt="logo"
+                class="object-cover w-15 h-15"></a>
+
+        <!-- Desktop Nav -->
+        <nav class="hidden lg:flex gap-8 text-sm font-medium">
+            <a href="/" class="hover:text-blue-600">Home</a>
+            <a href="/pricing/" class="hover:text-blue-600">Pricing</a>
+            <a href="/events/" class="hover:text-blue-600">Events</a>
+            <a href="/parties/" class="hover:text-blue-600">Parties</a>
+            <a href="/contact/" class="hover:text-blue-600">Contact</a>
+        </nav>
+
+        <!-- Mobile Hamburger -->
+        <button id="menuButton" class="lg:hidden p-2" aria-label="Open menu">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24"
+                stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+        </button>
+    </header>
+
+    <!-- Slide-in Mobile Menu -->
+    <div id="mobileMenu" class="fixed top-0 right-0 h-full w-64 bg-cream shadow-lg z-40
+           transform translate-x-full transition-transform duration-300 ease-in-out">
+        <div class="flex items-center justify-between px-4 py-4 border-b-3 border-burnedorange">
+            <span class="font-normal text-base font-header tracking-widest text-darkblue">Mountain Park Pool</span>
+            <button id="closeMenu" aria-label="Close menu">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="#6681A5"
+                    stroke-width="1">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+        </div>
+        <nav class="flex flex-col px-6 py-4 gap-4 text-3xl font-semibold font-header">
+            <a href="/" class="text-burnedorange">Home</a>
+            <a href="/join/" class="text-waterblue">Join</a>
+            <a href="/events/" class="text-mustard-dark">Book Event</a>
+            <a href="/calendar/" class="text-darkseagreen">Pool Calendar</a>
+            <a href="/rules/" class="text-burnedorange">Pool Rules</a>
+            <a href="/login/" class="text-waterblue">My Account</a>
+            <a href="/admin/" class="adminMenu text-mustard-dark hidden">Admin</a>
+
+            <button class="logoutBtn hidden text-darkseagreen font-header font-semibold text-3xl text-left">
+                Sign Out
+            </button>
+
+
+
+        </nav>
+        <div
+            class="absolute bottom-6 left-6 right-6 border-t border-mustard pt-4 flex flex-col gap-6 justify-between items-center">
+            <span class="text-sm text-darkblue opacity-60">Mon–Sun • 6am–12am</span>
+            <div class="flex gap-3">
+                <!-- your social SVGs here -->
+                <a href="https://www.facebook.com/share/1B7aLsaesS/?mibextid=wwXIfr">
+                    <img src="/icons/facebook-hollow.svg" alt="facebook" class="w-6 h-6">
+                </a>
+                <a href="https://www.instagram.com/mountain_park_pool?igsh=MW0xaHNqa3g5YXdiYw==">
+                    <img src="/icons/insta.svg" alt="instagram" class="w-6 h-6">
+                </a>
+
+
+                <a href="tel:+19152608231" aria-label="Call us" class="hover:opacity-70 transition-opacity">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="none"
+                        stroke="#6681A5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path
+                            d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.4 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.78a16 16 0 0 0 6.29 6.29l.95-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z" />
+                    </svg>
+                </a>
+                <a href="mailto:themountainparkpool@gmail.com">
+                    <img src="/icons/email-darkblue.svg" alt="email" class="w-6 h-6">
+                </a>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Overlay -->
+    <div id="overlay" class="fixed inset-0 bg-black/40 z-30 hidden"></div>
+
+    <main class="pt-23 p-4 flex flex-col gap-5">
+
+       <div class="text-3xl font-header min-h-80 text-burnedorange mt-30 text-center flex justify-center">Coming Soon!</div>
+
+    </main>
+
+
+    <footer class=" border-t-4 border-mustard mt-12 px-6 py-8">
+        <div class="flex flex-col items-center gap-4">
+
+            <!-- Logo / Name -->
+            <p class="font-header font-bold text-darkblue text-lg tracking-wide">Mountain Park Pool</p>
+
+            <!-- Social Icons -->
+            <div class="flex gap-5">
+
+                <!-- Instagram -->
+                <a href="https://www.instagram.com/mountain_park_pool?igsh=MW0xaHNqa3g5YXdiYw==" aria-label="Instagram"
+                    class="hover:opacity-70 transition-opacity">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="none"
+                        stroke="#6681A5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+                        <circle cx="12" cy="12" r="4" />
+                        <circle cx="17.5" cy="6.5" r="0.5" fill="#6681A5" />
+                    </svg>
+                </a>
+
+                <!-- Facebook -->
+                <a href="https://www.facebook.com/share/1B7aLsaesS/?mibextid=wwXIfr" aria-label="Facebook"
+                    class="hover:opacity-70 transition-opacity">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="none"
+                        stroke="#6681A5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+                    </svg>
+                </a>
+
+                <a href="tel:+19152608231" aria-label="Call us" class="hover:opacity-70 transition-opacity">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="none"
+                        stroke="#6681A5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path
+                            d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.4 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.78a16 16 0 0 0 6.29 6.29l.95-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z" />
+                    </svg>
+                </a>
+                <a href="mailto:themountainparkpool@gmail.com">
+                    <img src="/icons/email-darkblue.svg" alt="email" class="w-6 h-6">
+                </a>
+
+            </div>
+
+            <!-- Divider -->
+            <div class="w-16 h-0.5 bg-mustard"></div>
+
+            <!-- Copyright -->
+            <p class="text-xs text-darkblue opacity-70 text-center">
+                &copy; <span id="footer-year">2026</span> Mountain Park Pool. All rights reserved.
+            </p>
+
+        </div>
+    </footer>
+
+    <script src="main.js" type="module"></script>
+</body>
+
+</html>

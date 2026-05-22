@@ -212,7 +212,8 @@ export async function getAllMembers() {
         status,
         payment_confirmed,
         payment_confirmed_at,
-        season_id
+        season_id,
+        notes
       ),
       household_members (
         first_name,

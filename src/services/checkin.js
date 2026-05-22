@@ -30,13 +30,18 @@ let currentSeason = null
 let membersPresent = 0
 
 const successMessages = [
-    "Making a splash! 🌊",
-    "Dive in, you're good to go! 🏊",
-    "Sun's out, swim's out! ☀️",
-    "Cannonball approved! 💦",
-    "You're officially in the pool! 🐬",
-    "Let the good times flow! 🌊",
-    "Pool party time! 🎉",
+    "Don't worry, beach happy!",
+    "Pool yourself together!",
+    "Water you waiting for? Jump in!",
+    "Just keep swimming!",
+    "Let the good times roll.",
+    "Relaxation unlocked.",
+    "Seas the day!",
+    "Orange you glad it's pool day!",
+    "Grab the sunscreen!",
+    "Cool by the pool",
+    "Hakuna Matata!",
+
 ]
 
 async function init() {
@@ -142,7 +147,7 @@ function renderMembers(profile, householdMembers) {
 function createMemberRow(firstName, lastName, isPrimary, defaultChecked) {
     const initials = `${firstName[0]}${lastName[0]}`.toUpperCase()
     const label = document.createElement('label')
-    label.className = `flex items-center gap-3 bg-cream border-2 rounded-xl p-4 cursor-pointer transition-all
+    label.className = `flex items-center gap-3 bg-cream border-2 rounded-xl p-4 py-2 cursor-pointer transition-all
     ${defaultChecked ? 'border-waterblue bg-waterblue/5' : 'border-mustard'}`
 
     label.innerHTML = `
@@ -235,7 +240,7 @@ document.getElementById('submitBtn').addEventListener('click', async () => {
 })
 
 // ── SUCCESS ────────────────────────────────────────────
-function showSuccess(members, guests) {
+async function showSuccess(members, guests) {
     const now = new Date()
     const msg = successMessages[Math.floor(Math.random() * successMessages.length)]
 
@@ -249,8 +254,33 @@ function showSuccess(members, guests) {
     document.getElementById('formState').classList.add('hidden')
     document.getElementById('successState').classList.remove('hidden')
     document.getElementById('successState').classList.add('flex')
+    await getCurrentTemp()
 
     window.scrollTo({ top: 0, behavior: 'smooth' })
+}
+
+async function getCurrentTemp() {
+    // El Paso coordinates and Fahrenheit setting
+    const url = "https://api.open-meteo.com/v1/forecast?latitude=31.7587&longitude=-106.4869&current=temperature_2m&temperature_unit=fahrenheit";
+
+    fetch(url)
+        .then(response => {
+            if (!response.ok) throw new Error("Weather data fetch failed");
+            return response.json();
+        })
+        .then(data => {
+            // Round the temperature to a whole number
+            const temp = Math.round(data.current.temperature_2m);
+
+            // Select your HTML element and update it
+            const weatherDisplay = document.getElementById('weather-display');
+            weatherDisplay.innerText = `${temp}°F`;
+        })
+        .catch(error => {
+            console.error("Error fetching weather:", error);
+            // Fallback text if the API fails so the page doesn't look broken
+            document.getElementById('weather-display').innerText = "Checked In!";
+        });
 }
 
 // ── RUN ────────────────────────────────────────────────

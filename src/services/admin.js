@@ -101,7 +101,7 @@ function renderMembers(members) {
         })
         const memberRole = member.role;
         const nameColor = memberRole === 'admin' ? 'burnedorange' : 'waterblue';
-
+        console.log(membership)
         const card = document.createElement('div')
         card.className = 'member-card bg-cream border border-mustard rounded-xl overflow-hidden'
         card.dataset.memberId = member.id
