@@ -43,14 +43,16 @@ async function handleConfirmation() {
       .maybeSingle()
 
     if (!existing) {
-      const pendingData = JSON.parse(localStorage.getItem('pendingSignup') || '{}')
+      //const pendingData = JSON.parse(localStorage.getItem('pendingSignup') || '{}')
+      const pendingData = session.user.user_metadata?.householdMembers || '[]'
+      console.log(pendingData)
 
-      if (pendingData.householdMembers?.length > 0) {
-        await insertHouseholdMembers(session.user.id, pendingData.householdMembers)
+      if (pendingData.length > 0) {
+        await insertHouseholdMembers(session.user.id, pendingData)
       }
 
       await insertMembership(session.user.id, season.id)
-      localStorage.removeItem('pendingSignup')
+      //localStorage.removeItem('pendingSignup')
     }
 
     showState('successState')

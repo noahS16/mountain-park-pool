@@ -10,7 +10,7 @@ export async function signUpUser(email, password, profileData) {
     email, 
     password, 
     options: {
-      emailRedirectTo: `${window.location.origin}/confirm/`,
+      emailRedirectTo: "https://mountainparkpooleptx.com/confirm/",
       data: {
         first_name: profileData.firstName,
         last_name: profileData.lastName,
@@ -20,6 +20,7 @@ export async function signUpUser(email, password, profileData) {
         emergency_contact_phone: profileData.ecPhone,
         payment_preference: profileData.payment,
         photo_consent: profileData.photoConsent,
+        householdMembers: profileData.householdMembers,
       }
     }
   })

@@ -145,6 +145,7 @@ form.addEventListener('submit', async (e) => {
         ecPhone,
         payment,
         photoConsent,
+        householdMembers,
     })
 
     // client-side validation
@@ -165,9 +166,9 @@ form.addEventListener('submit', async (e) => {
         //const season = await getCurrentSeason()
 
         // hold household members.
-        localStorage.setItem('pendingSignup', JSON.stringify({
-            householdMembers: householdMembers,
-        }))
+        // localStorage.setItem('pendingSignup', JSON.stringify({
+        //     householdMembers: householdMembers,
+        // }))
 
         const user = await signUpUser(email, password, {
             firstName,
@@ -179,6 +180,7 @@ form.addEventListener('submit', async (e) => {
             ecPhone,
             payment,
             photoConsent,
+            householdMembers
         })
 
         // wait for session to be fully established
