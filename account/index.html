@@ -97,8 +97,7 @@
 
         <!-- Page Header -->
         <div class="flex items-center justify-between">
-            <h1
-                class="font-header font-bold text-3xl text-waterblue">
+            <h1 class="font-header font-bold text-3xl text-waterblue">
                 My Account</h1>
             <button
                 class="logoutBtn hidden text-xs font-semibold text-darkblue/80 underline hover:text-darkblue transition-colors whitespace-nowrap ml-15">
@@ -155,9 +154,21 @@
                     class="hidden bg-yellow-50 border border-mustard rounded-lg px-3 py-3 text-xs text-yellow-900 leading-relaxed">
                     <span id="pendingNoticeText"></span>
                 </div>
+                <!-- Gate code — shown only for active members -->
+                <div id="gateCodeSection"
+                    class="hidden bg-cream border border-seagreen rounded-lg px-4 py-3 flex items-center justify-between">
+                    <div class="flex flex-col gap-0.5">
+                        <span class="text-xs font-bold uppercase tracking-widest opacity-40">Gate Code</span>
+                        <span class="text-2xl font-bold tracking-widest text-darkblue" id="gateCode">••••</span>
+                    </div>
+                    <button id="toggleCode" class="text-sm font-bold text-waterblue underline flex-shrink-0">
+                        Show
+                    </button>
+                </div>
 
 
             </div>
+
         </div>
 
         <!-- Check In Button -->

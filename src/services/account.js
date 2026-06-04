@@ -49,6 +49,22 @@ function renderStatusCard(profile, membership, season) {
     const badge = document.getElementById('statusBadge')
     const dot = document.getElementById('statusDot')
     const status = membership?.status ?? 'pending'
+    const gateSection = document.getElementById('gateCodeSection')
+    const gateCode = document.getElementById('gateCode')
+    const toggleBtn = document.getElementById('toggleCode')
+
+    if (status === 'active') {
+        gateSection.classList.remove('hidden')
+
+        let visible = false
+        const ACTUAL_CODE = '1958' // replace with real code
+
+        toggleBtn.addEventListener('click', () => {
+            visible = !visible
+            gateCode.textContent = visible ? ACTUAL_CODE : '••••'
+            toggleBtn.textContent = visible ? 'Hide' : 'Show'
+        })
+    }
 
     // card styles per status
     const styles = {
@@ -154,7 +170,7 @@ function renderActivity(checkIns) {
         const lastDate = new Date(last.checked_in_at)
         console.log(lastDate)
         document.getElementById('lastVisitDate').textContent =
-            lastDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric'})
+            lastDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })
         document.getElementById('lastVisitRelative').textContent =
             getRelativeTime(lastDate)
     } else {
