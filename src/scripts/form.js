@@ -162,13 +162,6 @@ form.addEventListener('submit', async (e) => {
     setLoading(true)
 
     try {
-        // 1. get current season
-        //const season = await getCurrentSeason()
-
-        // hold household members.
-        // localStorage.setItem('pendingSignup', JSON.stringify({
-        //     householdMembers: householdMembers,
-        // }))
 
         const user = await signUpUser(email, password, {
             firstName,
@@ -183,34 +176,7 @@ form.addEventListener('submit', async (e) => {
             householdMembers
         })
 
-        // wait for session to be fully established
-        // const { data: { session } } = await supabase.auth.getSession()
-        // if (!session) {
-        //     // session not ready yet, retry once after a short delay
-        //     await new Promise(resolve => setTimeout(resolve, 1000))
-        // }
-
-        // 3. update profile with full details
-        // await insertProfile(user, {
-        //     firstName,
-        //     lastName,
-        //     address,
-        //     email,
-        //     phone,
-        //     ecName,
-        //     ecPhone,
-        //     payment,
-        //     photoConsent,
-        // })
-
-        // 4. insert household members if any
-        //await insertHouseholdMembers(user.id, householdMembers)
-
-        // 5. insert membership for current season
-        //await insertMembership(user.id, season.id)
-
-        // success — redirect to account page
-        // instead of redirecting, show a check email message
+        // check email message
         document.getElementById('joinForm').classList.add('hidden')
         const msg = document.createElement('div')
         msg.className = 'flex flex-col items-center text-center gap-5 py-10'
@@ -231,7 +197,6 @@ form.addEventListener('submit', async (e) => {
             <a href="/login/" class="text-sm font-bold text-burnedorange underline mt-2">← Go to Sign In</a>
         `
         document.querySelector('main').appendChild(msg)
-        //window.scrollTo({ top: 0, behavior: 'smooth' })
 
     } catch (err) {
         console.error(err)

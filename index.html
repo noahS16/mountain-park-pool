@@ -11,18 +11,24 @@
 
 <body class="bg-white">
   <header
-    class="fixed bg-seagreen border-b-4 border-mustard shadow-sm  top-0 left-0 right-0 z-30 bg-white-400  flex items-center justify-between px-6 pb-2">
+    class="fixed bg-seagreen border-b-4 border-mustard shadow-sm  top-0 left-0 right-0 z-30 bg-white-400  flex items-center justify-between px-6 pb-2 lg:p-4">
     <!-- Logo / Site Name -->
     <a href="/" class="text-3xl font-bold text-blue-700 tracking-tight"><img src="/photos/logo.png" alt="logo"
         class="object-cover w-15 h-15"></a>
 
     <!-- Desktop Nav -->
-    <nav class="hidden lg:flex gap-8 text-sm font-medium">
-      <a href="/" class="hover:text-blue-600">Home</a>
-      <a href="/pricing/" class="hover:text-blue-600">Pricing</a>
-      <a href="/events/" class="hover:text-blue-600">Events</a>
-      <a href="/parties/" class="hover:text-blue-600">Parties</a>
-      <a href="/contact/" class="hover:text-blue-600">Contact</a>
+    <nav class="hidden lg:flex gap-8 text-2xl font-header font-header">
+      <a href="/" class="text-burnedorange">Home</a>
+      <a href="/join/" class="text-waterblue">Join</a>
+      <a href="/events/" class="text-mustard-dark">Book Event</a>
+      <a href="/calendar/" class="text-darkseagreen">Pool Calendar</a>
+      <a href="/rules/" class="text-burnedorange">Pool Rules</a>
+      <a href="/login/" class="text-waterblue">My Account</a>
+      <a href="/admin/" class="adminMenu text-mustard-dark hidden">Admin</a>
+
+      <button class="logoutBtn hidden text-darkseagreen font-header font-semibold text-3xl text-left">
+        Sign Out
+      </button>
     </nav>
 
     <!-- Mobile Hamburger -->
@@ -93,13 +99,13 @@
   <!-- Overlay -->
   <div id="overlay" class="fixed inset-0 bg-black/40 z-30 hidden"></div>
 
-  <main class="pt-22 p-4 bg">
+  <main class="pt-22 p-4 bg lg:p-0 lg:pt-24">
     <section class="">
       <!-- Carousel -->
       <div id="hero-carousel" class="splide" aria-label="Mountain Park Pool Photos">
         <div class="splide__track">
           <ul class="splide__list">
-            <li id="titleSlide" class="splide__slide flex flex-col items-center justify-center bg-waterblue rounded-xl">
+            <li id="titleSlide" class="splide__slide flex flex-col items-center justify-center bg-waterblue rounded-xl lg:rounded-none">
               <div class="text-center font-bold justify-center flex flex-col gap-3 mt-auto">
                 <span
                   class="bg-burnedorange rounded-full py-1 px-6 mx-auto tracking-[3px] font-semibold text-black">EST.
@@ -118,13 +124,13 @@
 
             </li>
             <li class="splide__slide">
-              <img src="/photos/pool.png" alt="Pool overview" class="w-full h-90 object-cover rounded-xl" />
+              <img src="/photos/pool.png" alt="Pool overview" class="w-full h-90 object-cover rounded-xl lg:rounded-none lg:object-none" />
             </li>
             <li class="splide__slide">
-              <img src="/photos/pool2.png" alt="Splash area" class="w-full h-90 object-cover rounded-xl" />
+              <img src="/photos/pool2.png" alt="Splash area" class="w-full h-90 object-cover rounded-xl lg:rounded-none" />
             </li>
             <li class="splide__slide">
-              <img src="/photos/pool3.png" alt="Pool deck" class="w-full h-90 object-cover rounded-xl" />
+              <img src="/photos/pool3.png" alt="Pool deck" class="w-full h-90 object-cover rounded-xl lg:rounded-none" />
             </li>
           </ul>
         </div>

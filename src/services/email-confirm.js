@@ -23,36 +23,12 @@ async function handleConfirmation() {
 
   try {
     // give Supabase a moment to process the token
-    await new Promise(resolve => setTimeout(resolve, 1000))
-
+    await new Promise(resolve => setTimeout(resolve, 3000))
     const { data: { session }, error } = await supabase.auth.getSession()
 
     if (error || !session) {
       showState('errorState')
       return
-    }
-
-    const season = await getCurrentSeason()
-
-    // check if membership already exists — prevents duplicate on double click
-    const { data: existing } = await supabase
-      .from('memberships')
-      .select('id')
-      .eq('profile_id', session.user.id)
-      .eq('season_id', season.id)
-      .maybeSingle()
-
-    if (!existing) {
-      //const pendingData = JSON.parse(localStorage.getItem('pendingSignup') || '{}')
-      const pendingData = session.user.user_metadata?.householdMembers || '[]'
-      console.log(pendingData)
-
-      if (pendingData.length > 0) {
-        await insertHouseholdMembers(session.user.id, pendingData)
-      }
-
-      await insertMembership(session.user.id, season.id)
-      //localStorage.removeItem('pendingSignup')
     }
 
     showState('successState')
