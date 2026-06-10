@@ -50,8 +50,8 @@ async function init() {
         showError(params.get('error_description') || 'This reset link has expired.')
         return
     }
-
-    const isSession = await getSession()
+    await new Promise(resolve => setTimeout(resolve, 1500))
+    isSession = await getSession()
     if (isSession) {
         showPasswordField()
     } else {
@@ -63,9 +63,10 @@ init()
 
 resetBtn.addEventListener('click', async () => {
     hideError()
-    const email = document.getElementById('loginEmail').value.trim()
+    const sessionActive = await getSession()
 
-    if (!isSession) {
+    if (!sessionActive) {
+        const email = document.getElementById('loginEmail').value.trim()
         try {
             if (!email) {
                 showError('Please enter your email.')
