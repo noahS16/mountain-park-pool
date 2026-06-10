@@ -11,18 +11,24 @@
 
 <body class="bg-white">
     <header
-        class="fixed bg-seagreen border-b-4 border-mustard shadow-sm  top-0 left-0 right-0 z-30 bg-white-400  flex items-center justify-between px-6 pb-2">
+        class="fixed bg-seagreen border-b-4 border-mustard shadow-sm  top-0 left-0 right-0 z-30 bg-white-400  flex items-center justify-between px-6 pb-2 lg:p-3">
         <!-- Logo / Site Name -->
         <a href="/" class="text-3xl font-bold text-blue-700 tracking-tight"><img src="/photos/logo.png" alt="logo"
                 class="object-cover w-15 h-15"></a>
 
         <!-- Desktop Nav -->
-        <nav class="hidden lg:flex gap-8 text-sm font-medium">
-            <a href="/" class="hover:text-blue-600">Home</a>
-            <a href="/pricing/" class="hover:text-blue-600">Pricing</a>
-            <a href="/events/" class="hover:text-blue-600">Events</a>
-            <a href="/parties/" class="hover:text-blue-600">Parties</a>
-            <a href="/contact/" class="hover:text-blue-600">Contact</a>
+        <nav class="hidden lg:flex gap-8 text-2xl font-header font-header">
+            <a href="/" class="text-burnedorange">Home</a>
+            <a href="/join/" class="text-waterblue">Join</a>
+            <a href="/events/" class="text-mustard-dark">Book Event</a>
+            <a href="/calendar/" class="text-darkseagreen">Pool Calendar</a>
+            <a href="/rules/" class="text-burnedorange">Pool Rules</a>
+            <a href="/login/" class="text-waterblue">My Account</a>
+            <a href="/admin/" class="adminMenu text-mustard-dark hidden">Admin</a>
+
+            <button class="logoutBtn hidden text-darkseagreen font-header text-2xl text-left">
+                Sign Out
+            </button>
         </nav>
 
         <!-- Mobile Hamburger -->
@@ -93,166 +99,226 @@
     <!-- Overlay -->
     <div id="overlay" class="fixed inset-0 bg-black/40 z-30 hidden"></div>
 
-    <main class="pt-23 p-4 flex flex-col gap-5">
+    <main class="pt-23 p-4 flex flex-col gap-5 lg:px-15 lg:pt-30">
 
         <!-- Page Header -->
         <div class="flex items-center justify-between">
-            <h1 class="font-header font-bold text-3xl text-waterblue">
+            <h1 class="font-header font-bold text-3xl text-waterblue lg:text-4xl">
                 My Account</h1>
             <button
-                class="logoutBtn hidden text-xs font-semibold text-darkblue/80 underline hover:text-darkblue transition-colors whitespace-nowrap ml-15">
+                class="logoutBtn hidden text-xs font-semibold text-darkblue/80 underline hover:text-darkblue transition-colors whitespace-nowrap ml-15 lg:text-sm">
                 Sign Out
             </button>
         </div>
         <p id="memberGreeting" class="text-sm text-darkblue/50 -mt-3"></p>
         <div class="bg-mustard w-full h-[1.5px]"></div>
+        <div class="lg:flex lg:w-full lg:flex-row lg:gap-10 lg:items-center flex flex-col gap-5">
+            <!-- Membership Status Card -->
+            <div class="lg:w-2/3">
+                <div class="flex items-center gap-3 mb-3">
+                    <span
+                        class="uppercase text-xs tracking-widest font-bold text-darkblue whitespace-nowrap">Membership</span>
+                    <div class="bg-mustard w-full h-[1.5px]"></div>
+                </div>
 
-        <!-- Membership Status Card -->
-        <div>
-            <div class="flex items-center gap-3 mb-3">
-                <span
-                    class="uppercase text-xs tracking-widest font-bold text-darkblue whitespace-nowrap">Membership</span>
-                <div class="bg-mustard w-full h-[1.5px]"></div>
+                <div id="statusCard" class="rounded-xl p-5 flex flex-col gap-4 border-l-4 relative overflow-hidden">
+
+                    <div class="flex items-start justify-between gap-3">
+                        <div class="flex flex-col gap-1">
+                            <span id="statusSeasonLabel"
+                                class="text-xs font-semibold tracking-widest uppercase opacity-60"></span>
+                            <h2 id="statusFamilyName" class="font-header font-bold text-2xl"></h2>
+                        </div>
+                        <div id="statusBadge"
+                            class="flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-bold flex-shrink-0">
+                            <span id="statusDot" class="w-2 h-2 rounded-full"></span>
+                            <span id="statusText"></span>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-3">
+                        <div class="flex flex-col gap-0.5">
+                            <span class="text-xs font-bold uppercase tracking-widest opacity-40">Season</span>
+                            <span id="statusSeason" class="text-sm font-semibold"></span>
+                        </div>
+                        <div class="flex flex-col gap-0.5">
+                            <span class="text-xs font-bold uppercase tracking-widest opacity-40">Joined</span>
+                            <span id="statusJoined" class="text-sm font-semibold"></span>
+                        </div>
+                        <div class="flex flex-col gap-0.5">
+                            <span class="text-xs font-bold uppercase tracking-widest opacity-40">Payment</span>
+                            <span id="statusPayment" class="text-sm font-semibold"></span>
+                        </div>
+                        <div class="flex flex-col gap-0.5">
+                            <span class="text-xs font-bold uppercase tracking-widest opacity-40">Payment Status</span>
+                            <span id="statusPaymentStatus" class="text-sm font-semibold"></span>
+                        </div>
+                    </div>
+
+                    <!-- Pending notice — hidden for active members -->
+                    <div id="pendingNotice"
+                        class="hidden bg-yellow-50 border border-mustard rounded-lg px-3 py-3 text-xs text-yellow-900 leading-relaxed">
+                        <span id="pendingNoticeText"></span>
+                    </div>
+                    <!-- Gate code — shown only for active members -->
+                    <div id="gateCodeSection"
+                        class="hidden bg-cream border border-seagreen rounded-lg px-4 py-3 flex flex-col justify-between">
+                        <div class="flex flex-row justify-between">
+                            <div class="flex flex-col gap-0.5">
+                                <span class="text-xs font-bold uppercase tracking-widest opacity-40">Gate Code</span>
+                                <span class="text-2xl font-bold tracking-widest text-darkblue" id="gateCode">••••</span>
+                            </div>
+                            <button id="toggleCode" class="text-sm font-bold text-waterblue underline flex-shrink-0">
+                                Show
+                            </button>
+                        </div>
+
+                        <div class="flex flex-row gap-2 items-center border-t mt-2 pt-3 border-gray-400/40">
+                            <span class="text-xs font-bold tracking-widest opacity-40">WiFi</span>
+                            <span class="text-sm font-semibold">MPPOOLMEMBERS</span>
+                        </div>
+                        <div class="flex flex-row gap-2 items-center">
+                            <span class="text-xs font-bold uppercase tracking-widest opacity-40">Password</span>
+                            <span class="text-sm text-waterblue font-semibold">2026@MPPool2026</span>
+                        </div>
+
+                    </div>
+
+
+                </div>
+
             </div>
 
-            <div id="statusCard" class="rounded-xl p-5 flex flex-col gap-4 border-l-4 relative overflow-hidden">
+            <!-- Check In Button -->
+            <button id="checkinBtn"
+                class="lg:hidden w-full bg-waterblue text-white font-bold uppercase tracking-widest text-sm py-4 rounded-xl flex items-center justify-center gap-2 transition-all hover:bg-waterblue-dark shadow-md disabled:opacity-40 disabled:cursor-not-allowed"
+                disabled>
+                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M9 11l3 3L22 4" />
+                    <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" />
+                </svg>
+                Check In to Pool
+            </button>
 
-                <div class="flex items-start justify-between gap-3">
-                    <div class="flex flex-col gap-1">
-                        <span id="statusSeasonLabel"
-                            class="text-xs font-semibold tracking-widest uppercase opacity-60"></span>
-                        <h2 id="statusFamilyName" class="font-header font-bold text-2xl"></h2>
+            <!-- Activity -->
+            <div>
+                <div class="flex items-center gap-3 mb-3">
+                    <span
+                        class="uppercase text-xs tracking-widest font-bold text-darkblue whitespace-nowrap">Activity</span>
+                    <div class="bg-mustard w-full h-[1.5px]"></div>
+                </div>
+                <div class="lg:flex lg:flex-col lg:gap-5">
+                    <div class="grid grid-cols-2 gap-3 lg:gap-10 lg:grid-cols-2">
+                        <div
+                            class="bg-burnedorange border border-burnedorange-dark rounded-xl py-2 px-4 flex flex-col gap-1">
+                            <span class="text-xs font-bold uppercase tracking-widest text-cream">This
+                                Season</span>
+                            <span id="checkinCount" class="font-bold text-4xl text-cream">—</span>
+                            <span class="text-xs text-cream">check-ins</span>
+                        </div>
+                        <div class="bg-mustard border border-darkblue rounded-xl py-2 px-4 flex flex-col gap-1">
+                            <span class="text-xs font-bold uppercase tracking-widest text-darkblue">Last Visit</span>
+                            <span id="lastVisitDate" class="font-bold text-2xl text-darkblue pt-1">—</span>
+                            <span id="lastVisitRelative" class="text-xs text-darkblue"></span>
+                        </div>
                     </div>
-                    <div id="statusBadge"
-                        class="flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-bold flex-shrink-0">
-                        <span id="statusDot" class="w-2 h-2 rounded-full"></span>
-                        <span id="statusText"></span>
+
+                    <!-- Quick Links -->
+                    <div class="hidden lg:grid">
+                        <div class="flex items-center gap-3 mb-3">
+                            <span
+                                class="uppercase text-xs tracking-widest font-bold text-darkblue whitespace-nowrap">Quick
+                                Links</span>
+                            <div class="bg-mustard w-full h-[1.5px]"></div>
+                        </div>
+                        <div class="grid grid-cols-2 gap-3">
+                            <a href="/rules/"
+                                class="bg-darkblue border border-mustard rounded-xl p-3 flex flex-col gap-1 hover:border-waterblue transition-colors">
+                                <img src="/icons/book.svg" alt="" class="w-5 h-5">
+                                <span class="text-xs font-bold text-cream">Pool Rules</span>
+                                <span class="text-xs text-cream">Review guidelines</span>
+                            </a>
+                            <a href="/events/"
+                                class="bg-burnedorange border border-burnedorange-dark rounded-xl p-3 flex flex-col gap-1 hover:border-waterblue transition-colors">
+                                <img src="/icons/party.svg" alt="" class="w-5 h-5">
+                                <span class="text-xs font-bold text-cream">Book an Event</span>
+                                <span class="text-xs text-cream">30% member discount</span>
+                            </a>
+                            <a href="https://chat.whatsapp.com/LIsHfe9Ic1SIYNvWU6Gmbo?mode=gi_t"
+                                class="bg-mustard border border-mustard-dark rounded-xl p-3 flex flex-col gap-1 hover:border-waterblue transition-colors">
+                                <img src="/icons/phone-darkblue.svg" alt="" class="w-5 h-5">
+                                <span class="text-xs font-bold text-darkblue">Members WhatsApp</span>
+                                <span class="text-xs text-darkblue">Join our Members only WhatsApp group.</span>
+                            </a>
+                            <a href="/join/"
+                                class="bg-waterblue border border-waterblue-dark rounded-xl p-3 flex flex-col gap-1 hover:border-waterblue transition-colors">
+                                <img src="/icons/check.svg" alt="" class="w-5 h-5">
+                                <span class="text-xs font-bold text-cream">Payment Info</span>
+                                <span class="text-xs text-cream">How to pay</span>
+                            </a>
+                        </div>
                     </div>
                 </div>
-
-                <div class="grid grid-cols-2 gap-3">
-                    <div class="flex flex-col gap-0.5">
-                        <span class="text-xs font-bold uppercase tracking-widest opacity-40">Season</span>
-                        <span id="statusSeason" class="text-sm font-semibold"></span>
-                    </div>
-                    <div class="flex flex-col gap-0.5">
-                        <span class="text-xs font-bold uppercase tracking-widest opacity-40">Joined</span>
-                        <span id="statusJoined" class="text-sm font-semibold"></span>
-                    </div>
-                    <div class="flex flex-col gap-0.5">
-                        <span class="text-xs font-bold uppercase tracking-widest opacity-40">Payment</span>
-                        <span id="statusPayment" class="text-sm font-semibold"></span>
-                    </div>
-                    <div class="flex flex-col gap-0.5">
-                        <span class="text-xs font-bold uppercase tracking-widest opacity-40">Payment Status</span>
-                        <span id="statusPaymentStatus" class="text-sm font-semibold"></span>
-                    </div>
-                </div>
-
-                <!-- Pending notice — hidden for active members -->
-                <div id="pendingNotice"
-                    class="hidden bg-yellow-50 border border-mustard rounded-lg px-3 py-3 text-xs text-yellow-900 leading-relaxed">
-                    <span id="pendingNoticeText"></span>
-                </div>
-                <!-- Gate code — shown only for active members -->
-                <div id="gateCodeSection"
-                    class="hidden bg-cream border border-seagreen rounded-lg px-4 py-3 flex items-center justify-between">
-                    <div class="flex flex-col gap-0.5">
-                        <span class="text-xs font-bold uppercase tracking-widest opacity-40">Gate Code</span>
-                        <span class="text-2xl font-bold tracking-widest text-darkblue" id="gateCode">••••</span>
-                    </div>
-                    <button id="toggleCode" class="text-sm font-bold text-waterblue underline flex-shrink-0">
-                        Show
-                    </button>
-                </div>
-
 
             </div>
 
         </div>
 
-        <!-- Check In Button -->
-        <button id="checkinBtn"
-            class="w-full bg-waterblue text-white font-bold uppercase tracking-widest text-sm py-4 rounded-xl flex items-center justify-center gap-2 transition-all hover:bg-waterblue-dark shadow-md disabled:opacity-40 disabled:cursor-not-allowed"
-            disabled>
-            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-                stroke-linecap="round" stroke-linejoin="round">
-                <path d="M9 11l3 3L22 4" />
-                <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" />
-            </svg>
-            Check In to Pool
-        </button>
+        <section class="lg:grid lg:grid-cols-2 lg:w-full lg:gap-10">
+            <!-- Member Info -->
+            <div class="">
+                <div class="flex items-center gap-3 mb-3">
+                    <span class="uppercase text-xs tracking-widest font-bold text-darkblue whitespace-nowrap">Your
+                        Info</span>
+                    <div class="bg-mustard w-full h-[1.5px]"></div>
+                </div>
+                <div class="bg-cream border border-mustard rounded-xl p-4 flex flex-col gap-3">
+                    <div class="flex flex-col gap-0.5">
+                        <span class="text-xs font-bold uppercase tracking-widest text-darkblue opacity-40">Full
+                            Name</span>
+                        <span id="infoName" class="text-sm font-medium text-darkblue"></span>
+                    </div>
+                    <div class="h-[1px] bg-mustard"></div>
+                    <div class="flex flex-col gap-0.5">
+                        <span
+                            class="text-xs font-bold uppercase tracking-widest text-darkblue opacity-40">Address</span>
+                        <span id="infoAddress" class="text-sm font-medium text-darkblue"></span>
+                    </div>
+                    <div class="h-[1px] bg-mustard"></div>
+                    <div class="flex flex-col gap-0.5">
+                        <span class="text-xs font-bold uppercase tracking-widest text-darkblue opacity-40">Email</span>
+                        <span id="infoEmail" class="text-sm font-medium text-darkblue"></span>
+                    </div>
+                    <div class="h-[1px] bg-mustard"></div>
+                    <div class="flex flex-col gap-0.5">
+                        <span class="text-xs font-bold uppercase tracking-widest text-darkblue opacity-40">Phone</span>
+                        <span id="infoPhone" class="text-sm font-medium text-darkblue"></span>
+                    </div>
+                    <div class="h-[1px] bg-mustard"></div>
+                    <div class="flex flex-col gap-0.5">
+                        <span class="text-xs font-bold uppercase tracking-widest text-darkblue opacity-40">Emergency
+                            Contact</span>
+                        <span id="infoEc" class="text-sm font-medium text-darkblue"></span>
+                    </div>
+                </div>
+            </div>
 
-        <!-- Activity -->
-        <div>
-            <div class="flex items-center gap-3 mb-3">
-                <span
-                    class="uppercase text-xs tracking-widest font-bold text-darkblue whitespace-nowrap">Activity</span>
-                <div class="bg-mustard w-full h-[1.5px]"></div>
-            </div>
-            <div class="grid grid-cols-2 gap-3">
-                <div class="bg-burnedorange border border-burnedorange-dark rounded-xl py-2 px-4 flex flex-col gap-1">
-                    <span class="text-xs font-bold uppercase tracking-widest text-cream">This
-                        Season</span>
-                    <span id="checkinCount" class="font-bold text-4xl text-cream">—</span>
-                    <span class="text-xs text-cream">check-ins</span>
+            <!-- Household Members -->
+            <div class="mt-5 lg:mt-0">
+                <div class="flex items-center gap-3 mb-3">
+                    <span class="uppercase text-xs tracking-widest font-bold text-darkblue whitespace-nowrap">Household
+                        Members</span>
+                    <div class="bg-mustard w-full h-[1.5px]"></div>
                 </div>
-                <div class="bg-mustard border border-darkblue rounded-xl py-2 px-4 flex flex-col gap-1">
-                    <span class="text-xs font-bold uppercase tracking-widest text-darkblue">Last Visit</span>
-                    <span id="lastVisitDate" class="font-bold text-2xl text-darkblue pt-1">—</span>
-                    <span id="lastVisitRelative" class="text-xs text-darkblue"></span>
-                </div>
+                <div id="householdList" class="flex flex-col gap-2"></div>
             </div>
-        </div>
+        </section>
 
-        <!-- Member Info -->
-        <div>
-            <div class="flex items-center gap-3 mb-3">
-                <span class="uppercase text-xs tracking-widest font-bold text-darkblue whitespace-nowrap">Your
-                    Info</span>
-                <div class="bg-mustard w-full h-[1.5px]"></div>
-            </div>
-            <div class="bg-cream border border-mustard rounded-xl p-4 flex flex-col gap-3">
-                <div class="flex flex-col gap-0.5">
-                    <span class="text-xs font-bold uppercase tracking-widest text-darkblue opacity-40">Full Name</span>
-                    <span id="infoName" class="text-sm font-medium text-darkblue"></span>
-                </div>
-                <div class="h-[1px] bg-mustard"></div>
-                <div class="flex flex-col gap-0.5">
-                    <span class="text-xs font-bold uppercase tracking-widest text-darkblue opacity-40">Address</span>
-                    <span id="infoAddress" class="text-sm font-medium text-darkblue"></span>
-                </div>
-                <div class="h-[1px] bg-mustard"></div>
-                <div class="flex flex-col gap-0.5">
-                    <span class="text-xs font-bold uppercase tracking-widest text-darkblue opacity-40">Email</span>
-                    <span id="infoEmail" class="text-sm font-medium text-darkblue"></span>
-                </div>
-                <div class="h-[1px] bg-mustard"></div>
-                <div class="flex flex-col gap-0.5">
-                    <span class="text-xs font-bold uppercase tracking-widest text-darkblue opacity-40">Phone</span>
-                    <span id="infoPhone" class="text-sm font-medium text-darkblue"></span>
-                </div>
-                <div class="h-[1px] bg-mustard"></div>
-                <div class="flex flex-col gap-0.5">
-                    <span class="text-xs font-bold uppercase tracking-widest text-darkblue opacity-40">Emergency
-                        Contact</span>
-                    <span id="infoEc" class="text-sm font-medium text-darkblue"></span>
-                </div>
-            </div>
-        </div>
 
-        <!-- Household Members -->
-        <div>
-            <div class="flex items-center gap-3 mb-3">
-                <span class="uppercase text-xs tracking-widest font-bold text-darkblue whitespace-nowrap">Household
-                    Members</span>
-                <div class="bg-mustard w-full h-[1.5px]"></div>
-            </div>
-            <div id="householdList" class="flex flex-col gap-2"></div>
-        </div>
 
         <!-- Quick Links -->
-        <div>
+        <div class="lg:hidden">
             <div class="flex items-center gap-3 mb-3">
                 <span class="uppercase text-xs tracking-widest font-bold text-darkblue whitespace-nowrap">Quick
                     Links</span>

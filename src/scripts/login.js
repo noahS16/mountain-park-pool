@@ -1,5 +1,4 @@
-import { supabase } from '../services/db.js'
-import { signInUser, getCurrentSeason } from '../services/db.js'
+import { signInUser, getCurrentSeason, supabase } from '../services/db.js'
 
 // ── SEASON BADGE ──────────────────────────────────────
 async function loadSeasonBadge() {
@@ -82,7 +81,28 @@ loginBtn.addEventListener('click', async () => {
         if (err.message?.includes('Invalid login credentials')) {
             showError('Invalid email or password. Please try again.')
         } else if (err.message?.includes('Email not confirmed')) {
-            showError('Please confirm your email address before signing in.')
+            showError('Please confirm your email before signing in.')
+
+            // add resend button below error
+            if (!document.getElementById('resendBtn')) {
+                const resendEl = document.createElement('button')
+                resendEl.textContent = 'Resend confirmation email →'
+                resendEl.className = 'text-xs font-bold text-burnedorange underline mt-1'
+                resendEl.addEventListener('click', async () => {
+                    resendEl.textContent = 'Sending...'
+                    resendEl.disabled = true
+                    const { error } = await supabase.auth.resend({
+                        type: 'signup',
+                        email: document.getElementById('loginEmail').value.trim(),
+                        options: { emailRedirectTo: `${window.location.origin}/confirm/` }
+                    })
+                    resendEl.textContent = error ? 'Failed — try again' : 'Sent! Check your inbox.'
+                })
+                loginError.after(resendEl)
+            }
+
+
+
         } else {
             showError('Something went wrong. Please try again.')
         }
@@ -90,8 +110,3 @@ loginBtn.addEventListener('click', async () => {
     }
 })
 
-// ── FORGOT PASSWORD (placeholder) ────────────────────
-document.getElementById('forgotPassword').addEventListener('click', () => {
-    // wire up later with supabase.auth.resetPasswordForEmail()
-    alert('Password reset coming soon. Contact us at themountainparkpool@gmail.com for help.')
-})

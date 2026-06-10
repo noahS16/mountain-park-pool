@@ -44,6 +44,10 @@ export async function getCurrentUser() {
     return session?.user ?? null
 }
 
+export async function resetPassword(newPassword){
+    
+}
+
 export async function insertProfile(user, formData) {
     const { error } = await supabase
         .from('profiles')

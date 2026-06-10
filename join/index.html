@@ -11,18 +11,24 @@
 
 <body class="bg-white">
     <header
-        class="fixed bg-seagreen border-b-4 border-mustard shadow-sm  top-0 left-0 right-0 z-30 bg-white-400  flex items-center justify-between px-6 pb-2">
+        class="fixed bg-seagreen border-b-4 border-mustard shadow-sm  top-0 left-0 right-0 z-30 bg-white-400  flex items-center justify-between px-6 pb-2 lg:p-3">
         <!-- Logo / Site Name -->
         <a href="/" class="text-3xl font-bold text-blue-700 tracking-tight"><img src="/photos/logo.png" alt="logo"
                 class="object-cover w-15 h-15"></a>
 
         <!-- Desktop Nav -->
-        <nav class="hidden lg:flex gap-8 text-sm font-medium">
-            <a href="/" class="hover:text-blue-600">Home</a>
-            <a href="/pricing/" class="hover:text-blue-600">Pricing</a>
-            <a href="/events/" class="hover:text-blue-600">Events</a>
-            <a href="/parties/" class="hover:text-blue-600">Parties</a>
-            <a href="/contact/" class="hover:text-blue-600">Contact</a>
+        <nav class="hidden lg:flex gap-8 text-2xl font-header font-header">
+            <a href="/" class="text-burnedorange">Home</a>
+            <a href="/join/" class="text-waterblue">Join</a>
+            <a href="/events/" class="text-mustard-dark">Book Event</a>
+            <a href="/calendar/" class="text-darkseagreen">Pool Calendar</a>
+            <a href="/rules/" class="text-burnedorange">Pool Rules</a>
+            <a href="/login/" class="text-waterblue">My Account</a>
+            <a href="/admin/" class="adminMenu text-mustard-dark hidden">Admin</a>
+
+            <button class="logoutBtn hidden text-darkseagreen font-header text-2xl text-left">
+                Sign Out
+            </button>
         </nav>
 
         <!-- Mobile Hamburger -->
@@ -93,11 +99,10 @@
     <!-- Overlay -->
     <div id="overlay" class="fixed inset-0 bg-black/40 z-30 hidden"></div>
 
-    <main class="pt-23 p-4">
+    <main class="pt-23 p-4 lg:px-10 lg:pt-30">
         <section>
             <div class="flex flex-col gap-2">
-                <h1
-                    class="text-3xl font-header font-bold text-waterblue ">
+                <h1 class="text-3xl font-header font-bold text-waterblue lg:text-4xl">
                     Memberships</h1>
                 <p class="text-sm text-darkblue/80">Become a member of Mountain Park Pool and make this a family summer
                     tradition.</p>
@@ -105,7 +110,7 @@
             <div class="bg-mustard w-full h-[1.5px] mt-5"></div>
         </section>
         <section class="pt-10">
-            <div class="infoCardsContainer flex flex-col gap-15">
+            <div class="infoCardsContainer flex flex-col gap-15 lg:grid lg:grid-cols-2 ">
 
                 <div class="priceCardContainer flex flex-col gap-3">
                     <div class="flex items-center justify-between gap-3">
@@ -223,7 +228,8 @@
                             <div class="accordion-body max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
                                 <p class="px-4 pb-4 text-sm text-darkblue/70 leading-relaxed">
                                     Charcoal grills will be available inside the park on a first come first serve basis
-                                    throughout the season. Please be mindful and share the grills with other members. The roundhouse includes 2 restrooms and a ping pong table.
+                                    throughout the season. Please be mindful and share the grills with other members.
+                                    The roundhouse includes 2 restrooms and a ping pong table.
                                     Please bring your own ball and paddles.
                                 </p>
                             </div>
@@ -270,89 +276,102 @@
                         <div class="bg-cream px-4 py-3 flex items-start gap-2">
                             <img src="/icons/yellow-pin.svg" alt="" class="w-5 h-5 mt-0.5 flex-shrink-0">
                             <p class="text-sm text-darkblue/70 leading-relaxed">
-                                Membership is open to residents in the surrounding Northeast El Paso neighborhoods. Don't live in the area? <a href="/contact/"
+                                Membership is open to residents in the surrounding Northeast El Paso neighborhoods.
+                                Don't live in the area? <a href="/contact/"
                                     class="text-burnedorange font-semibold underline">Contact us for availability.</a>
                             </p>
                         </div>
                     </div>
                 </div>
-            </div>
-
-        </section>
-        <section class="pt-15">
-            <div class="flex items-center gap-3 mb-5">
-                <span class="uppercase text-xs tracking-widest font-bold text-darkblue whitespace-nowrap">Payment
-                    Info</span>
-                <div class="bg-mustard w-full h-[1.5px]"></div>
-            </div>
-
-            <div class="flex flex-col gap-3">
-
-                <!-- Zelle -->
-                <div
-                    class="bg-darkblue rounded-xl border border-mustard p-4 flex gap-4 items-start border-l-4 border-l-mustard">
-                    <img src="/icons/zelle.svg" alt="" class="w-8 h-8 flex-shrink-0 mt-0.5">
-                    <div class="flex flex-col gap-1">
-                        <span class="text-normal font-bold uppercase tracking-widest text-cream">Zelle</span>
-                        <p class="text-sm text-cream">
-                            Send <strong class="text-cream font-bold text-base leading-[1px]">$475</strong> via Zelle
-                            to:
-                        </p>
+                <div class="flex flex-col gap-3">
+                    <div class="flex items-center gap-3">
                         <span
-                            class="font-bold text-darkblue text-sm bg-cream w-min px-3 py-1 rounded-full shadow-sm">themountainparkpool@gmail.com</span>
-                        <p class="text-xs text-cream mt-1">Include your full name in the memo so we can match your
-                            payment.</p>
+                            class="uppercase text-xs tracking-widest font-bold text-darkblue whitespace-nowrap">Payment
+                            Info</span>
+                        <div class="bg-mustard w-full h-[1.5px]"></div>
                     </div>
+
+                    <div class="flex flex-col gap-3">
+
+                        <!-- Zelle -->
+                        <div
+                            class="bg-darkblue rounded-xl border border-mustard p-4 flex gap-4 items-start border-l-4 border-l-mustard">
+                            <img src="/icons/zelle.svg" alt="" class="w-8 h-8 flex-shrink-0 mt-0.5">
+                            <div class="flex flex-col gap-1">
+                                <span class="text-normal font-bold uppercase tracking-widest text-cream">Zelle</span>
+                                <p class="text-sm text-cream">
+                                    Send <strong class="text-cream font-bold text-base leading-[1px]">$475</strong> via
+                                    Zelle
+                                    to:
+                                </p>
+                                <span
+                                    class="font-bold text-darkblue text-sm bg-cream w-min px-3 py-1 rounded-full shadow-sm">themountainparkpool@gmail.com</span>
+                                <p class="text-xs text-cream mt-1">Include your full name in the memo so we can match
+                                    your
+                                    payment.</p>
+                            </div>
+                        </div>
+
+                        <!-- Check -->
+                        <div
+                            class="bg-burnedorange rounded-xl border border-burnedorange-dark p-4 flex gap-4 items-start border-l-4 border-l-burnedorange-dark">
+                            <img src="/icons/check.svg" alt="" class="w-8 h-8 flex-shrink-0 mt-0.5">
+                            <div class="flex flex-col gap-1">
+                                <span class="text-normal font-bold uppercase tracking-widest text-cream">Check</span>
+                                <p class="text-sm text-cream/70 leading-relaxed">
+                                    Make checks payable to <strong class="text-cream">Mountain Park Pool</strong> and
+                                    mail
+                                    to:
+                                </p>
+                                <address
+                                    class="not-italic text-sm font-bold shadow-sm text-burnedorange bg-cream mr-auto rounded-xl p-2 px-4 leading-relaxed">
+                                    3405 Montridge Ct<br>
+                                    El Paso, TX 79904
+                                </address>
+                            </div>
+                        </div>
+
+                        <!-- Cash -->
+                        <div
+                            class="bg-seagreen rounded-xl border border-mustard p-4 flex gap-4 items-start border-l-4 border-l-mustard">
+                            <img src="/icons/cash.svg" alt="" class="w-8 h-8 flex-shrink-0 mt-0.5">
+                            <div class="flex flex-col gap-1">
+                                <span
+                                    class="text-normal font-bold uppercase tracking-widest text-darkseagreen">Cash</span>
+                                <p class="text-sm text-darkseagreen/70 leading-relaxed">
+                                    Cash payments can be made in person on <strong class="text-darkseagreen">Memorial
+                                        Day, May
+                                        25th</strong> at the pool, or by appointment.
+                                </p>
+                                <a href="tel:19152608231" class="text-sm font-bold text-darkseagreen underline">Contact
+                                    us →</a>
+                            </div>
+                        </div>
+
+                    </div>
+
                 </div>
 
-                <!-- Check -->
-                <div
-                    class="bg-burnedorange rounded-xl border border-burnedorange-dark p-4 flex gap-4 items-start border-l-4 border-l-burnedorange-dark">
-                    <img src="/icons/check.svg" alt="" class="w-8 h-8 flex-shrink-0 mt-0.5">
-                    <div class="flex flex-col gap-1">
-                        <span class="text-normal font-bold uppercase tracking-widest text-cream">Check</span>
-                        <p class="text-sm text-cream/70 leading-relaxed">
-                            Make checks payable to <strong class="text-cream">Mountain Park Pool</strong> and mail
-                            to:
-                        </p>
-                        <address
-                            class="not-italic text-sm font-bold shadow-sm text-burnedorange bg-cream mr-auto rounded-xl p-2 px-4 leading-relaxed">
-                            3405 Montridge Ct<br>
-                            El Paso, TX 79904
-                        </address>
-                    </div>
-                </div>
-
-                <!-- Cash -->
-                <div
-                    class="bg-seagreen rounded-xl border border-mustard p-4 flex gap-4 items-start border-l-4 border-l-mustard">
-                    <img src="/icons/cash.svg" alt="" class="w-8 h-8 flex-shrink-0 mt-0.5">
-                    <div class="flex flex-col gap-1">
-                        <span class="text-normal font-bold uppercase tracking-widest text-darkseagreen">Cash</span>
-                        <p class="text-sm text-darkseagreen/70 leading-relaxed">
-                            Cash payments can be made in person on <strong class="text-darkseagreen">Memorial Day, May
-                                25th</strong> at the pool, or by appointment.
-                        </p>
-                        <a href="tel:19152608231" class="text-sm font-bold text-darkseagreen underline">Contact us →</a>
-                    </div>
-                </div>
 
             </div>
+
         </section>
-        <section class="pt-15 pb-10" id="joinForm">
+
+        <section class="pt-10 pb-10" id="joinForm">
             <div class="flex items-center gap-3 mb-5">
                 <span class="uppercase text-xs tracking-widest font-bold text-darkblue whitespace-nowrap">Join
                     Form</span>
                 <div class="bg-mustard w-full h-[1.5px]"></div>
             </div>
 
-            <form id="joinForm" action="#" method="POST" class="flex flex-col gap-5">
+            <form id="joinForm" action="#" method="POST" class="flex flex-col gap-5 lg:grid lg:grid-cols-2">
 
                 <!-- Primary Member Name -->
                 <div class="flex gap-3">
                     <div class="flex flex-col gap-1.5 flex-1 min-w-0">
                         <label for="firstName" class="text-xs font-bold uppercase tracking-widest text-darkblue">First
-                            Name<span class="tracking-tight normal-case font-light text-darkblue/70"> (Holder)</span></label>
+                            Name<span class="tracking-tight normal-case font-light text-darkblue/70">
+                                (Holder)</span></label>
                         <input type="text" id="firstName" name="firstName" required autocomplete="given-name"
                             class="rounded-lg border border-mustard bg-cream px-4 py-3 text-sm text-darkblue placeholder:text-darkblue/40 focus:outline-none focus:ring-2 focus:ring-waterblue"
                             placeholder="Maria" />
@@ -387,7 +406,8 @@
                 <!-- Password -->
                 <div class="flex flex-col gap-1.5">
                     <label for="password" class="text-xs font-bold uppercase tracking-widest text-darkblue">
-                        Create Password <span class="tracking-tight normal-case font-light text-darkblue/70">(Your email and password will be used to login and view your membership info)</span>
+                        Create Password <span class="tracking-tight normal-case font-light text-darkblue/70">(Your email
+                            and password will be used to login and view your membership info)</span>
                     </label>
                     <input type="password" id="password" name="password" required autocomplete="new-password"
                         minlength="8"
@@ -419,7 +439,9 @@
                 <div class="flex flex-col gap-3">
                     <div class="flex items-center justify-between">
                         <label class="text-xs font-bold uppercase tracking-widest text-darkblue flex flex-col">Household
-                            Members<span class="tracking-tight normal-case font-light text-darkblue/70">(Members 16+ residing in the same household as the membership holder. You DO NOT need to add the name above.)</span></label>
+                            Members<span class="tracking-tight normal-case font-light text-darkblue/70">(Members 16+
+                                residing in the same household as the membership holder. You DO NOT need to add the name
+                                above.)</span></label>
                         <span class="text-xs text-darkblue/40 whitespace-nowrap">Up to 3</span>
                     </div>
 
@@ -539,17 +561,21 @@
                     </label>
 
                 </div>
+                <div class="lg:mt-auto lg:flex lg:flex-col lg:gap-3">
+                    <!-- Submit -->
+                    <button type="submit"
+                        class="w-full rounded-xl bg-mustard border-2 border-burnedorange text-darkblue font-bold uppercase tracking-widest py-4 text-sm transition-all hover:bg-mustard-dark hover:text-white mt-2 lg:h-min lg:mt-auto ">
+                        Submit Registration
+                    </button>
 
-                <!-- Submit -->
-                <button type="submit"
-                    class="w-full rounded-xl bg-mustard border-2 border-burnedorange text-darkblue font-bold uppercase tracking-widest py-4 text-sm transition-all hover:bg-mustard-dark hover:text-white mt-2">
-                    Submit Registration
-                </button>
+                    <p class="text-xs text-darkblue/50 text-center leading-relaxed lg:text-sm">
+                        After submitting, complete your payment of <strong class="text-darkblue/70">$475</strong> via
+                        your
+                        chosen method. Your membership will be activated once we recieve your payment.
+                    </p>
+                </div>
 
-                <p class="text-xs text-darkblue/50 text-center leading-relaxed">
-                    After submitting, complete your payment of <strong class="text-darkblue/70">$475</strong> via your
-                    chosen method. Your membership will be activated once we recieve your payment.
-                </p>
+
 
             </form>
         </section>

@@ -191,12 +191,38 @@ form.addEventListener('submit', async (e) => {
                 Click the link to activate your account, then come back to sign in.
             </p>
             <p class="text-xs text-darkblue/40 leading-relaxed">
-                Didn't get it? Check your spam folder or contact us at
+                Didn't get it? Check your spam folder or
+                <button id="resendBtn" class="text-burnedorange underline font-semibold">resend the email</button>.
+            </p>
+            <p class="text-xs text-darkblue/40 leading-relaxed">
+                Still having trouble? Contact us at
                 <a href="mailto:themountainparkpool@gmail.com" class="text-burnedorange underline">themountainparkpool@gmail.com</a>
             </p>
             <a href="/login/" class="text-sm font-bold text-burnedorange underline mt-2">← Go to Sign In</a>
         `
         document.querySelector('main').appendChild(msg)
+        // resend button
+        document.getElementById('resendBtn').addEventListener('click', async () => {
+            const btn = document.getElementById('resendBtn')
+            btn.textContent = 'Sending...'
+            btn.disabled = true
+
+            try {
+                const { error } = await supabase.auth.resend({
+                    type: 'signup',
+                    email: email,
+                    options: {
+                        emailRedirectTo: `${window.location.origin}/confirm/`
+                    }
+                })
+                if (error) throw error
+                btn.textContent = 'Sent! Check your inbox.'
+            } catch (err) {
+                console.error(err)
+                btn.textContent = 'Failed — try again'
+                btn.disabled = false
+            }
+        })
 
     } catch (err) {
         console.error(err)

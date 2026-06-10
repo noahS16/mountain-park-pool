@@ -19,6 +19,7 @@ export default defineConfig({
         checkin: resolve(__dirname, 'checkin/index.html'),
         admin: resolve(__dirname, 'admin/index.html'),
         confirm: resolve(__dirname, 'confirm/index.html'),
+        'forgot-password': resolve(__dirname, 'login/forgot-password/index.html')
       }
     }
   }
