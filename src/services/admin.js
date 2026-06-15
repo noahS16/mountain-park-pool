@@ -43,6 +43,7 @@ async function init() {
     try {
         currentSeason = await getCurrentSeason()
         document.getElementById('seasonLabel').textContent = `${currentSeason.year} Season`
+        await seasonSettings(currentSeason)
 
         const [members, bookings, checkins] = await Promise.all([
             getAllMembers(),
@@ -65,6 +66,49 @@ async function init() {
     } catch (err) {
         console.error('Admin load error:', err)
     }
+}
+
+// SEASON SETTINGS
+async function seasonSettings(currentSeason) {
+    // populate season settings
+    document.getElementById('gateCodeInput').value = currentSeason.gate_code ?? ''
+    document.getElementById('wifiNameInput').value = currentSeason.wifi_name ?? ''
+    document.getElementById('wifiPassInput').value = currentSeason.wifi_password ?? ''
+
+    // toggle
+    const toggleBtn = document.getElementById('toggleSettings')
+    const panel = document.getElementById('settingsPanel')
+    const chevron = document.getElementById('settingsChevron')
+    let settingsOpen = false
+
+    toggleBtn.addEventListener('click', () => {
+        settingsOpen = !settingsOpen
+        panel.style.maxHeight = settingsOpen ? panel.scrollHeight + 'px' : '0px'
+        chevron.style.transform = settingsOpen ? 'rotate(180deg)' : ''
+        toggleBtn.classList.toggle('rounded-xl', !settingsOpen)
+        toggleBtn.classList.toggle('rounded-t-xl', settingsOpen)
+        toggleBtn.classList.toggle('rounded-b-none', settingsOpen)
+    })
+
+    // save
+    document.getElementById('saveSeasonSettings').addEventListener('click', async () => {
+        const btn = document.getElementById('saveSeasonSettings')
+        try {
+            const { error } = await supabase
+                .from('seasons')
+                .update({
+                    gate_code: document.getElementById('gateCodeInput').value.trim(),
+                    wifi_name: document.getElementById('wifiNameInput').value.trim(),
+                    wifi_password: document.getElementById('wifiPassInput').value.trim(),
+                })
+                .eq('id', currentSeason.id)
+            if (error) throw error
+            showSaveConfirm(btn)
+        } catch (err) {
+            console.error('Settings save failed:', err)
+            alert('Failed to save settings.')
+        }
+    })
 }
 
 // ── STATS ──────────────────────────────────────────────
@@ -123,6 +167,7 @@ function renderMembers(members) {
             <option value="expired" ${status === 'expired' ? 'selected' : ''}>Expired</option>
           </select>
           <span class="text-xs text-darkblue/30">${checkInCount} check-ins</span>
+          
         </div>
         <span class="text-darkblue/30 text-xs ml-2 chevron transition-transform duration-200">▼</span>
       </div>
@@ -131,8 +176,14 @@ function renderMembers(members) {
         <div class="p-4 flex flex-col gap-4">
 
           <div>
-            <p class="text-xs font-bold uppercase tracking-widest text-darkblue/40 mb-2">Member Info</p>
+            
             <div class="grid grid-cols-2 gap-2">
+            <div class="flex flex-col gap-0.5 col-span-2">
+                <span class="text-xs font-bold uppercase tracking-wider text-darkblue/30">Email Verified</span>
+                <span class="text-xs font-medium ${member.email_confirmed ? 'text-green-600' : 'text-red-500'}">
+                    ${member.email_confirmed ? '✓ Verified' : '✗ Not verified'}
+                </span>
+            </div>
               <div class="flex flex-col gap-0.5">
                 <span class="text-xs font-bold uppercase tracking-wider text-darkblue/30">Address</span>
                 <span class="text-xs font-medium text-darkblue">${member.address}</span>
@@ -255,7 +306,7 @@ function renderBookings(bookings) {
         card.className = 'booking-card bg-cream border border-mustard rounded-xl overflow-hidden'
         card.dataset.bookingId = booking.id
 
-        const eventDate = new Date(booking.event_date).toLocaleDateString('en-US', {month: 'short', day: 'numeric'})
+        const eventDate = new Date(booking.event_date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })
         const eventStartTime = convertMilitaryTo12Hour(booking.event_start_time)
         const eventEndTime = convertMilitaryTo12Hour(booking.event_end_time)
 
@@ -265,8 +316,8 @@ function renderBookings(bookings) {
             <div class="flex flex-row gap-1">
                 <span class="text-sm font-semibold text-darkblue">${booking.contact_name}</span>
             <span class="text-xs font-bold rounded-full px-2 py-0.5 ${booking.is_member
-                    ? 'bg-waterblue/10 text-waterblue'
-                    : 'bg-burnedorange/10 text-burnedorange'}">
+                ? 'bg-waterblue/10 text-waterblue'
+                : 'bg-burnedorange/10 text-burnedorange'}">
                 ${booking.is_member ? 'Member' : 'Non-member'}
             </span>
             </div>
@@ -591,21 +642,21 @@ function showSaveConfirm(btn) {
 }
 
 function convertMilitaryTo12Hour(timeStr) {
-  // 1. Split the string into hours, minutes, and seconds
-  let [hours, minutes, seconds] = timeStr.split(':');
-  
-  // Convert hours to an integer for math
-  hours = parseInt(hours, 10);
-  
-  // 2. Determine am or pm
-  const ampm = hours >= 12 ? 'pm' : 'am';
-  
-  // 3. Convert 24-hour clock to 12-hour clock
-  // (12 % 12 = 0, so we use || 12 to turn 0 into 12 for midnight)
-  hours = hours % 12 || 12;
-  
-  // 4. Return the formatted string (excluding seconds as per your example)
-  return `${hours}:${minutes}${ampm}`;
+    // 1. Split the string into hours, minutes, and seconds
+    let [hours, minutes, seconds] = timeStr.split(':');
+
+    // Convert hours to an integer for math
+    hours = parseInt(hours, 10);
+
+    // 2. Determine am or pm
+    const ampm = hours >= 12 ? 'pm' : 'am';
+
+    // 3. Convert 24-hour clock to 12-hour clock
+    // (12 % 12 = 0, so we use || 12 to turn 0 into 12 for midnight)
+    hours = hours % 12 || 12;
+
+    // 4. Return the formatted string (excluding seconds as per your example)
+    return `${hours}:${minutes}${ampm}`;
 }
 
 

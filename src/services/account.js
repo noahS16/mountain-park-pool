@@ -52,18 +52,23 @@ function renderStatusCard(profile, membership, season) {
     const gateSection = document.getElementById('gateCodeSection')
     const gateCode = document.getElementById('gateCode')
     const toggleBtn = document.getElementById('toggleCode')
+    const GATE_CODE = season.gate_code ?? '-'
+    const WIFI_NAME = season.wifi_name ?? '-'
+    const WIFI_PASS = season.wifi_password ?? '_'
 
     if (status === 'active') {
         gateSection.classList.remove('hidden')
 
         let visible = false
-        const ACTUAL_CODE = '1958' // replace with real code
+        
 
         toggleBtn.addEventListener('click', () => {
             visible = !visible
-            gateCode.textContent = visible ? ACTUAL_CODE : '••••'
+            gateCode.textContent = visible ? GATE_CODE : '••••'
             toggleBtn.textContent = visible ? 'Hide' : 'Show'
         })
+        document.getElementById('wifiName').textContent = WIFI_NAME
+        document.getElementById('wifiPassword').textContent = WIFI_PASS
     }
 
     // card styles per status

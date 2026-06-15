@@ -32,6 +32,10 @@ async function handleConfirmation() {
     }
 
     showState('successState')
+    await supabase
+      .from('profiles')
+      .update({email_confirmed: true})
+      .eq('id', session.user.id)
 
   } catch (err) {
     console.error('Confirmation error:', err)
