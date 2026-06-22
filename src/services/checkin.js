@@ -28,6 +28,7 @@ let guestCount = 0
 let currentProfile = null
 let currentSeason = null
 let membersPresent = 0
+let gateCode = null
 
 const successMessages = [
     "Don't worry, beach happy!",
@@ -73,6 +74,7 @@ async function init() {
 
         currentProfile = profile
         currentSeason = season
+        gateCode = season.gate_code ?? 'Please contact us.'
 
         // set date
         document.getElementById('checkinDate').textContent =
@@ -255,6 +257,7 @@ async function showSuccess(members, guests) {
     document.getElementById('successState').classList.remove('hidden')
     document.getElementById('successState').classList.add('flex')
     await getCurrentTemp()
+    document.getElementById('gateCode').textContent = gateCode
 
     window.scrollTo({ top: 0, behavior: 'smooth' })
 }
