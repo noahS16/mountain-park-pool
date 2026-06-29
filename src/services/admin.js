@@ -229,7 +229,7 @@ function renderMembers(members) {
               Save Notes
             </button>
             <button data-delete class="bg-red-100 text-red-800 text-xs font-bold px-4 py-2.5 rounded-lg hover:bg-red-200 transition-colors">
-              Delete
+              Delete Member
             </button>
           </div>
 
@@ -366,9 +366,14 @@ function renderBookings(bookings) {
             <p class="text-xs font-bold uppercase tracking-widest text-darkblue/40 mb-2">Notes</p>
             <textarea data-notes class="w-full bg-white border border-mustard rounded-lg px-3 py-2 text-xs text-darkblue resize-none focus:outline-none focus:ring-2 focus:ring-waterblue" rows="3" placeholder="Add notes...">${booking.notes ?? ''}</textarea>
           </div>
-          <button data-save class="w-full bg-waterblue text-white text-xs font-bold py-2.5 rounded-lg hover:bg-waterblue-dark transition-colors">
-            Save Notes
-          </button>
+          <div class="flex gap-2">
+                <button data-save class="flex-1 bg-waterblue text-white text-xs font-bold py-2.5 rounded-lg hover:bg-waterblue-dark transition-colors">
+                    Save Notes
+                </button>
+                <button data-delete-booking class="bg-red-100 text-red-800 text-xs font-bold px-4 py-2.5 rounded-lg hover:bg-red-200 transition-colors">
+                    Delete Event
+                </button>
+            </div>
         </div>
       </div>
     `
@@ -410,8 +415,28 @@ function renderBookings(bookings) {
             }
         })
 
+        // delete booking
+        card.querySelector('[data-delete-booking]').addEventListener('click', async () => {
+            const confirmed = confirm(`Delete booking for ${booking.contact_name}? This cannot be undone.`)
+            if (!confirmed) return
+            try {
+                const { error } = await supabase
+                    .from('event_bookings')
+                    .delete()
+                    .eq('id', booking.id)
+                if (error) throw error
+                card.remove()
+                allBookings = allBookings.filter(b => b.id !== booking.id)
+            } catch (err) {
+                console.error('Delete booking failed:', err)
+                alert('Failed to delete booking.')
+            }
+        })
+
         list.appendChild(card)
     })
+
+
 }
 
 // ── CHECKINS ────────────────────────────────────────────
@@ -558,31 +583,47 @@ function filterCheckins() {
 
 // ── EXPORT CSV ─────────────────────────────────────────
 function setupExport() {
-    document.getElementById('exportBtn').addEventListener('click', () => {
-        const headers = ['First Name', 'Last Name', 'Email', 'Phone', 'Address', 'Payment Preference', 'Status', 'Joined']
-        const rows = allMembers.map(m => {
-            const status = m.memberships?.find(mb => mb.season_id === currentSeason.id)?.status ?? 'pending'
-            return [
-                m.first_name,
-                m.last_name,
-                m.email,
-                m.phone,
-                m.address,
-                m.payment_preference ?? '',
-                status,
-                new Date(m.created_at).toLocaleDateString(),
-            ]
-        })
+    // document.getElementById('exportBtn').addEventListener('click', () => {
+    //     const headers = ['First Name', 'Last Name', 'Email', 'Phone', 'Address', 'Payment Preference', 'Status', 'Joined']
+    //     const rows = allMembers.map(m => {
+    //         const status = m.memberships?.find(mb => mb.season_id === currentSeason.id)?.status ?? 'pending'
+    //         return [
+    //             m.first_name,
+    //             m.last_name,
+    //             m.email,
+    //             m.phone,
+    //             m.address,
+    //             m.payment_preference ?? '',
+    //             status,
+    //             new Date(m.created_at).toLocaleDateString(),
+    //         ]
+    //     })
 
-        const csv = [headers, ...rows]
-            .map(row => row.map(val => `"${val}"`).join(','))
-            .join('\n')
+    //     const csv = [headers, ...rows]
+    //         .map(row => row.map(val => `"${val}"`).join(','))
+    //         .join('\n')
 
-        const blob = new Blob([csv], { type: 'text/csv' })
+    //     const blob = new Blob([csv], { type: 'text/csv' })
+    //     const url = URL.createObjectURL(blob)
+    //     const a = document.createElement('a')
+    //     a.href = url
+    //     a.download = `mpp-members-${currentSeason.year}.csv`
+    //     a.click()
+    //     URL.revokeObjectURL(url)
+    // })
+
+    // Export emails.txt
+    document.getElementById('exportEmailsBtn').addEventListener('click', () => {
+        const emails = allMembers
+            .filter(m => m.memberships?.some(mb => mb.season_id === currentSeason.id && mb.status === 'active'))
+            .map(m => m.email)
+            .join(', ')
+
+        const blob = new Blob([emails], { type: 'text/plain' })
         const url = URL.createObjectURL(blob)
         const a = document.createElement('a')
         a.href = url
-        a.download = `mpp-members-${currentSeason.year}.csv`
+        a.download = `mpp-emails-${currentSeason.year}.txt`
         a.click()
         URL.revokeObjectURL(url)
     })

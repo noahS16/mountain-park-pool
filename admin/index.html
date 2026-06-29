@@ -204,16 +204,21 @@
                     <input id="memberSearch" type="text" placeholder="Search members..."
                         class="flex-1 bg-cream border border-mustard rounded-lg px-3 py-2.5 text-sm text-darkblue placeholder:text-darkblue/30 focus:outline-none focus:ring-2 focus:ring-waterblue" />
                     <select id="memberFilter"
-                        class="bg-darkblue border-2 border-cream rounded-lg px-3 py-2.5 text-xs font-semibold text-cream focus:outline-none">
+                        class="bg-darkblue border-2 border-cream rounded-lg px-3 py-2.5 text-xs text-cream font-semibold text-cream focus:outline-none">
                         <option value="all">All</option>
                         <option value="active">Active</option>
                         <option value="pending">Pending</option>
                         <option value="expired">Expired</option>
                     </select>
-                    <button id="exportBtn"
+                    <!-- <button id="exportBtn"
                         class="bg-burnedorange border-2 border-burnedorange-dark rounded-lg px-3 py-2.5 text-xs font-bold text-cream hover:border-waterblue transition-colors">
                         ↓ CSV
+                    </button> -->
+                    <button id="exportEmailsBtn"
+                        class="flex flex-row gap-2 text-cream items-center bg-burnedorange border-2 border-burnedorange-dark rounded-lg px-3 py-2.5 text-xs font-bold text-cream hover:border-waterblue transition-colors">
+                        ↓ <span><img src="/icons/email-cream.svg" alt="" class="h-5 w-5"></span>
                     </button>
+                    
                 </div>
                 <div id="membersList" class="flex flex-col gap-2"></div>
             </div>
