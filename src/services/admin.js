@@ -306,7 +306,7 @@ function renderBookings(bookings) {
         card.className = 'booking-card bg-cream border border-mustard rounded-xl overflow-hidden'
         card.dataset.bookingId = booking.id
 
-        const eventDate = new Date(booking.event_date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })
+        const eventDate = new Date(booking.event_date + 'T00:00:00').toLocaleDateString('en-US', { month: 'short', day: 'numeric' })
         const eventStartTime = convertMilitaryTo12Hour(booking.event_start_time)
         const eventEndTime = convertMilitaryTo12Hour(booking.event_end_time)
 
@@ -327,6 +327,7 @@ function renderBookings(bookings) {
               <option value="pending" ${booking.status === 'pending' ? 'selected' : ''}>Pending</option>
               <option value="confirmed" ${booking.status === 'confirmed' ? 'selected' : ''}>Confirmed</option>
               <option value="cancelled" ${booking.status === 'cancelled' ? 'selected' : ''}>Cancelled</option>
+              <option value="completed" ${booking.status === 'completed' ? 'selected' : ''}>Completed</option>
             </select>
             <span class="text-darkblue/30 text-xs chevron transition-transform duration-200">▼</span>
           </div>
@@ -662,6 +663,7 @@ function bookingStatusClass(status) {
         pending: 'bg-mustard text-yellow-900 border',
         confirmed: 'bg-green-100 text-green-800 border',
         cancelled: 'bg-red-100 text-red-800 border',
+        completed: 'bg-blue-100 text-blue-800 border'
     }[status] ?? 'bg-mustard text-yellow-900'
 }
 

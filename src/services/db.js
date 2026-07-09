@@ -6,26 +6,26 @@ const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY
 export const supabase = createClient(supabaseUrl, supabaseAnonKey)
 
 export async function signUpUser(email, password, profileData) {
-  const { data, error } = await supabase.auth.signUp({ 
-    email, 
-    password, 
-    options: {
-      emailRedirectTo: "https://mountainparkpooleptx.com/confirm/",
-      data: {
-        first_name: profileData.firstName,
-        last_name: profileData.lastName,
-        address: profileData.address,
-        phone: profileData.phone,
-        emergency_contact_name: profileData.ecName,
-        emergency_contact_phone: profileData.ecPhone,
-        payment_preference: profileData.payment,
-        photo_consent: profileData.photoConsent,
-        householdMembers: profileData.householdMembers,
-      }
-    }
-  })
-  if (error) throw error
-  return data.user
+    const { data, error } = await supabase.auth.signUp({
+        email,
+        password,
+        options: {
+            emailRedirectTo: "https://mountainparkpooleptx.com/confirm/",
+            data: {
+                first_name: profileData.firstName,
+                last_name: profileData.lastName,
+                address: profileData.address,
+                phone: profileData.phone,
+                emergency_contact_name: profileData.ecName,
+                emergency_contact_phone: profileData.ecPhone,
+                payment_preference: profileData.payment,
+                photo_consent: profileData.photoConsent,
+                householdMembers: profileData.householdMembers,
+            }
+        }
+    })
+    if (error) throw error
+    return data.user
 }
 
 export async function signInUser(email, password) {
@@ -44,8 +44,8 @@ export async function getCurrentUser() {
     return session?.user ?? null
 }
 
-export async function resetPassword(newPassword){
-    
+export async function resetPassword(newPassword) {
+
 }
 
 export async function insertProfile(user, formData) {
@@ -75,13 +75,13 @@ export async function getProfile(userId) {
     return data
 }
 
-export async function getPaymentMethod(userId){
-    const {data, error} = await supabase
+export async function getPaymentMethod(userId) {
+    const { data, error } = await supabase
         .from('profiles')
         .select('payment_preference')
         .eq('id', userId)
         .single()
-    if(error) throw error
+    if (error) throw error
     console.log(data)
     return data
 }
@@ -191,23 +191,23 @@ export async function getCurrentSeason() {
 // ============================================
 
 export async function insertEventBooking(formData, profileId = null) {
-  const { error } = await supabase
-    .from('event_bookings')
-    .insert({
-      profile_id: profileId,
-      is_member: formData.isMember,
-      contact_name: formData.contactName,
-      contact_email: formData.contactEmail,
-      contact_phone: formData.contactPhone,
-      event_date: formData.eventDate,
-      event_start_time: formData.eventStartTime,
-      event_end_time: formData.eventEndTime,
-      headcount: formData.headcount,
-      notes: formData.notes,
-      status: 'pending',
-      deposit_paid: false,
-    })
-  if (error) throw error
+    const { error } = await supabase
+        .from('event_bookings')
+        .insert({
+            profile_id: profileId,
+            is_member: formData.isMember,
+            contact_name: formData.contactName,
+            contact_email: formData.contactEmail,
+            contact_phone: formData.contactPhone,
+            event_date: formData.eventDate,
+            event_start_time: formData.eventStartTime,
+            event_end_time: formData.eventEndTime,
+            headcount: formData.headcount,
+            notes: formData.notes,
+            status: 'pending',
+            deposit_paid: false,
+        })
+    if (error) throw error
 }
 
 export async function getEventBookings(profileId) {
@@ -215,6 +215,42 @@ export async function getEventBookings(profileId) {
         .from('event_bookings')
         .select('*')
         .eq('profile_id', profileId)
+    if (error) throw error
+    return data
+}
+
+export async function getTodayEvent(dateStr) {
+    const { data, error } = await supabase
+        .from('event_bookings')
+        .select('event_date, event_start_time, event_end_time, headcount')
+        .eq('event_date', dateStr)
+        .eq('status', 'confirmed')
+        .maybeSingle()
+
+    if (error) throw error
+    return data
+}
+
+export async function getUpcomingEvents(afterDateStr, limit = 5) {
+    const { data, error } = await supabase
+        .from('event_bookings')
+        .select('event_date, event_start_time, event_end_time, headcount')
+        .gt('event_date', afterDateStr)
+        .eq('status', 'confirmed')
+        .order('event_date', { ascending: true })
+        .limit(limit)
+
+    if (error) throw error
+    return data
+}
+
+export async function getBookingsForDate(dateStr) {
+    const { data, error } = await supabase
+        .from('event_bookings')
+        .select('event_start_time, event_end_time')
+        .eq('event_date', dateStr)
+        .eq('status', 'confirmed')
+
     if (error) throw error
     return data
 }
@@ -309,12 +345,12 @@ export async function getCheckInHistory(profileId) {
     return data
 }
 
-export async function getAllCheckins(seasonId){
-    const {data, error} = await supabase
+export async function getAllCheckins(seasonId) {
+    const { data, error } = await supabase
         .from('check_ins')
         .select('*')
         .eq('season_id', seasonId)
-        .order('checked_in_at', {ascending: false})
+        .order('checked_in_at', { ascending: false })
     if (error) throw error
     //console.log("data", data);
     return data;

@@ -101,7 +101,50 @@
 
     <main class="pt-23 p-4 flex flex-col gap-5">
 
-       <div class="text-3xl font-header min-h-80 text-burnedorange mt-30 text-center flex justify-center">Coming Soon!</div>
+        <!-- Header -->
+        <div>
+            <h1 class="font-header font-bold text-3xl text-waterblue lg:text-4xl">
+                Pool Calendar</h1>
+            <p class="text-sm text-darkblue/50 mt-1">Upcoming events happening at Mountain Park Pool.</p>
+        </div>
+        <div class="bg-mustard w-full h-[1.5px]"></div>
+
+        <!-- Day nav -->
+        <div class="flex items-center justify-between mt-2">
+            <button id="prevDay" aria-label="Previous day" class="p-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="#6681A5"
+                    stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+                </svg>
+            </button>
+            <p id="dayLabel" class="font-header font-bold text-xl text-cream bg-burnedorange p-2 rounded-full px-4"></p>
+            <button id="nextDay" aria-label="Next day" class="p-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="#6681A5"
+                    stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+                </svg>
+            </button>
+        </div>
+
+        <!-- Today's event card (hidden if no event) -->
+        <div id="eventCard" class="hidden bg-cream border-2 border-mustard rounded-xl p-5">
+            <span class="inline-block text-xs font-semibold text-waterblue bg-blue-50 px-3 py-1 rounded">Private
+                party</span>
+            <p id="eventTime" class="font-header font-bold text-lg text-darkblue mt-2"></p>
+            <p id="eventHeadcount" class="text-sm text-darkblue/60 mt-1"></p>
+        </div>
+
+        <!-- No event fallback -->
+        <div id="noEventState" class="hidden text-center py-6">
+            <p class="text-darkblue/50 text-sm">No events scheduled this day.</p>
+        </div>
+
+        <!-- Upcoming list -->
+        <div>
+            <p class="text-sm font-semibold text-darkblue/70 mb-2">Upcoming events</p>
+            <div id="upcomingList" class="flex flex-col gap-2"></div>
+        </div>
+
 
     </main>
 

@@ -1,6 +1,4 @@
-import { supabase } from './db.js'
-import { getProfile, getCurrentSeason, insertEventBooking } from './db.js'
-import { signOutUser } from './db.js'
+import { getProfile, getCurrentSeason, insertEventBooking, supabase, signOutUser, getBookingsForDate } from './db.js'
 
 // ── MENU ───────────────────────────────────────────────
 const menuButton = document.getElementById('menuButton')
@@ -123,6 +121,30 @@ form.addEventListener('submit', async (e) => {
         return
     }
 
+    try {
+        const existingBookings = await getBookingsForDate(eventDate)
+
+        const hasConflict = existingBookings.some(booking => {
+            return startTime < booking.event_end_time && endTime > booking.event_start_time
+        })
+
+        if (hasConflict) {
+            showError('This date already has an event booked during that time. Please choose a different time or date.')
+            return
+        }
+    } catch (err) {
+        console.error('Failed to check availability:', err)
+        showError('Unable to verify availability right now. Please try again.')
+        return
+    }
+
+    const isSunday = new Date(eventDate + 'T00:00:00').getDay()
+
+    if (isSunday === 0) {
+        showError('Sorry, we don\'t take bookings on Sundays.')
+        return
+    }
+
     if (!startTime || !endTime) {
         showError('Please select a start and end time.')
         return
@@ -130,6 +152,17 @@ form.addEventListener('submit', async (e) => {
 
     if (startTime >= endTime) {
         showError('End time must be after start time.')
+        return
+    }
+    const toMinutes = (t) => {
+        const [h, m] = t.split(':').map(Number)
+        return h * 60 + m
+    }
+
+    const durationMinutes = toMinutes(endTime) - toMinutes(startTime)
+
+    if (durationMinutes > 6 * 60) {
+        showError('Events cannot be longer than 6 hours.')
         return
     }
 
@@ -192,4 +225,6 @@ function showSuccess(date, startTime, endTime, headcount, member, name) {
 }
 
 // ── RUN ────────────────────────────────────────────────
+const today = new Date().toISOString().split('T')[0]
+document.getElementById('eventDate').min = today // or minDateStr
 init()
